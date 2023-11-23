@@ -86,12 +86,12 @@ header {
   color: #505f98;
 
   .chose {
-    transition:  background-image 0.3s ease;
+    transition: background-image 0.3s ease;
     border-radius: 5px;
   }
 
   .chose:hover {
-    background-image: linear-gradient(to bottom right, #e7ecff, transparent); 
+    background-image: linear-gradient(to bottom right, #e7ecff, transparent);
   }
 
   .home {
@@ -121,6 +121,7 @@ section {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  align-items: center;
 
   .post {
     background-color: #f8fbff;
