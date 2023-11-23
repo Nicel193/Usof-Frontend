@@ -80,19 +80,29 @@ header {
 .slider {
   align-items: baseline;
   flex-direction: column;
-
+  float: left;
   margin-left: 5px;
   width: 250px;
+  color: #505f98;
 
-  .home{
+  .chose {
+    transition:  background-image 0.3s ease;
+    border-radius: 5px;
+  }
+
+  .chose:hover {
+    background-image: linear-gradient(to bottom right, #e7ecff, transparent); 
+  }
+
+  .home {
     margin: 5px;
   }
 
-  .categories{
+  .categories {
     justify-content: space-between;
   }
 
-  .category{
+  .category {
     margin: 5px;
   }
 
@@ -102,6 +112,60 @@ header {
 
     span {
       margin-left: 5px;
+    }
+  }
+}
+
+section {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  .post {
+    background-color: #f8fbff;
+    border-radius: 25px;
+    padding: 10px;
+    margin-top: 10px;
+    width: 80%;
+  }
+
+  .flex-center {
+    display: flex;
+    align-items: center;
+
+    span {
+      margin-left: 5px;
+      color: #505f98;
+      font-weight: 500;
+    }
+  }
+
+  h4 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #091133;
+  }
+
+  .like-dislike-container {
+    background-color: #e7ecff;
+    margin-top: 5px;
+    font-size: 22px;
+    border-radius: 25px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: inline-flex;
+    align-self: flex-start;
+
+    .icon {
+      color: #505f98;
+      transition: color 0.3s ease;
+    }
+
+    .icon:hover {
+      color: #091133;
     }
   }
 }
