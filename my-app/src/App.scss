@@ -1,0 +1,107 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700&display=swap")
+    format("truetype");
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+
+body {
+  background-color: white;
+  font-family: "Roboto", sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+
+  .headerLeft {
+    display: flex;
+    align-items: center;
+
+    h3 {
+      margin: 8px;
+      font-size: 23px;
+      color: #6d70b3;
+      font-family: "Righteous", sans-serif;
+    }
+  }
+
+  .signIn {
+    width: 168px;
+    height: 39px;
+    background-color: transparent;
+    border: 2.5px solid #6d70b3;
+    color: #6d70b3;
+    font-size: 16px;
+    font-family: "Roboto", sans-serif;
+    border-radius: 5px;
+    font-weight: 500;
+  }
+
+  .signIn:hover {
+    background-color: #e7ecff;
+  }
+
+  .logIn {
+    width: 168px;
+    height: 39px;
+    font-size: 16px;
+    margin-left: 5px;
+    background-color: #6d70b3;
+    border: 2.5px solid #6d70b3;
+    color: white;
+    font-weight: 500;
+    border-radius: 5px;
+    font-family: "Roboto", sans-serif;
+  }
+
+  .logIn:hover {
+    color: #6d70b3;
+    background-color: #e7ecff;
+  }
+
+  .signIn,
+  .logIn {
+    transition: background-color 0.3s, color 0.3s;
+  }
+}
+
+.underline {
+  border: none;
+  border-top: 3px solid #f3f6ff;
+  width: 100%;
+}
+
+.slider {
+  align-items: baseline;
+  flex-direction: column;
+
+  margin-left: 5px;
+  width: 250px;
+
+  .home{
+    margin: 5px;
+  }
+
+  .categories{
+    justify-content: space-between;
+  }
+
+  .category{
+    margin: 5px;
+  }
+
+  .flex-center {
+    display: flex;
+    align-items: center;
+
+    span {
+      margin-left: 5px;
+    }
+  }
+}
