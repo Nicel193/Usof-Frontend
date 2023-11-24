@@ -1,0 +1,45 @@
+.post {
+  background-color: #f8fbff;
+  border-radius: 25px;
+  padding: 10px;
+  margin-top: 10px;
+
+  .flex-center {
+    display: flex;
+    align-items: center;
+
+    span {
+      margin-left: 5px;
+      color: #505f98;
+      font-weight: 500;
+    }
+  }
+
+  h4 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #091133;
+  }
+
+  .like-dislike-container {
+    background-color: #e7ecff;
+    margin-top: 5px;
+    font-size: 20px;
+    border-radius: 25px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: inline-flex;
+    align-self: flex-start;
+
+    .icon {
+      color: #505f98;
+      transition: color 0.3s ease;
+    }
+
+    .icon:hover {
+      color: #091133;
+    }
+  }
+}

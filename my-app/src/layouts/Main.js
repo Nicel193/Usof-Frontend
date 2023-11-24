@@ -7,7 +7,7 @@ import { UilHome } from "@iconscout/react-unicons";
 import { UilAngleDown } from "@iconscout/react-unicons";
 import { UilChannel } from "@iconscout/react-unicons";
 
-const Main = ({ prop1, prop2 }) => {
+const Main = () => {
   return (
     <div>
       <Header />

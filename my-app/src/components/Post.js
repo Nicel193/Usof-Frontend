@@ -1,4 +1,4 @@
-import "../layouts/Main.scss";
+import "./Post.scss";
 import React from "react";
 
 import { UilThumbsUp } from "@iconscout/react-unicons";
@@ -27,8 +27,8 @@ const Post = () => {
       </span>
       <div></div>
       <div className="flex-center like-dislike-container">
-        <UilThumbsUp className="icon" size="27" />
-        <UilThumbsDown className="icon" size="27" />
+        <UilThumbsUp className="icon" />
+        <UilThumbsDown className="icon" />
         <span>5</span>
       </div>
     </div>
