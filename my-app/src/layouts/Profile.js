@@ -48,13 +48,13 @@ const Profile = ({ prop1, prop2 }) => {
 
             <div className="additionalInfo">
               <div className="flex-center">
-                <UilAt />
+                <UilAt size={18}/>
                 <span>
                   <u>nicelgoog@gmail.com</u>
                 </span>
               </div>
               <div className=" flex-center">
-                <UilAdjustHalf />
+                <UilAdjustHalf size={18}/>
                 <span>Karma: 5</span>
               </div>
             </div>
