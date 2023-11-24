@@ -19,14 +19,30 @@ header {
   margin-top: 3px;
   margin-bottom: 3px;
 
+  svg {
+    fill: linear-gradient(45deg, #505f98, #fff);
+    animation: colorChange 3s infinite alternate;
+  }
+
+  @keyframes colorChange {
+    0% {
+      fill: #505f98;
+    }
+    100% {
+      fill: #fff;
+    }
+  }
+
   .headerLeft {
     display: flex;
     align-items: center;
 
     h3 {
-      margin: 8px;
+      margin-left: 2px;
+      margin-top: 8px;
+      margin-bottom: 8px;
       font-size: 23px;
-      color: #6d70b3;
+      color: #505f98;
       font-family: "Righteous", sans-serif;
     }
   }
@@ -35,7 +51,7 @@ header {
     width: 168px;
     height: 39px;
     background-color: transparent;
-    border: 2.5px solid #6d70b3;
+    border: 2.5px solid #505f98;
     color: #6d70b3;
     font-size: 16px;
     font-family: "Roboto", sans-serif;
@@ -52,8 +68,8 @@ header {
     height: 39px;
     font-size: 16px;
     margin-left: 5px;
-    background-color: #6d70b3;
-    border: 2.5px solid #6d70b3;
+    background-color: #505f98;
+    border: 2.5px solid #505f98;
     color: white;
     font-weight: 500;
     border-radius: 5px;

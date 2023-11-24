@@ -1,10 +1,10 @@
 import Main from "./layouts/Main";
-import Auth from "./layouts/Auth";
+// import Auth from "./layouts/Auth";
 
 const App = () => {
   return (
     <div className="app">
-      <Auth />
+      <Main />
     </div>
   );
 };
