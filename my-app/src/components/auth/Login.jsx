@@ -24,7 +24,6 @@ const Login = () => {
         if (res) successfulAuth();
       });
     }
-    // eslint-disable-next-line
   }, []);
 
   async function loginUser() {

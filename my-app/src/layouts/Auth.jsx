@@ -1,16 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { UilUser, UilLock } from "@iconscout/react-unicons";
 import Register from "../components/auth/Register";
 import Login from "../components/auth/Login";
+import { useLocation } from "react-router-dom";
 
 import "./styles/Auth.scss";
 
 const Auth = () => {
+  const location = useLocation();
+  const state = new URLSearchParams(location.search).get("state");
   const [activeTab, setActiveTab] = useState(false);
 
-  const setTab = () => {
+  useEffect(() => {
+    setActiveTab(state === 'register');
+  }, []); 
+
+  function setTab() {
     setActiveTab(!activeTab);
-  };
+  }
 
   return (
     <div className="authStyle">

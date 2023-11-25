@@ -2,6 +2,7 @@ import "./Header.scss";
 import React from "react";
 
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const isAuth = useSelector((state) => state.auth.authorizationStatus);
@@ -31,9 +32,12 @@ const Header = () => {
         <div className="headerRight">
           {!isAuth ? (
             <>
-              {" "}
-              <button className="signIn">Sign In</button>
-              <button className="logIn">Log In</button>
+              <Link to={{ pathname: "/auth", search: "?state=login" }}>
+                <button className="signIn">Sign In</button>
+              </Link>
+              <Link to={{ pathname: "/auth", search: "?state=register" }}>
+                <button className="logIn">Log In</button>
+              </Link>
             </>
           ) : (
             <>
