@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "./layouts/Main";
 import Auth from "./layouts/Auth";
-import Profile from "./layouts/Profile";
+// import Profile from "./layouts/Profile";
 
 const App = () => {
 
@@ -10,7 +10,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/auth" element={<Auth />} />
-        <Route path="/profile" element={<Profile />} />
+        {/* <Route path="/profile" element={<Profile />} /> */}
       </Routes>
     </BrowserRouter>
   );

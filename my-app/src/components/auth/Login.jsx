@@ -1,18 +1,33 @@
 import React, { useState } from "react";
 import { UilUser, UilLock } from "@iconscout/react-unicons";
 import { login } from "../../api/auth";
+import checkAuth from "../../services/authService";
 
 const Login = () => {
   const [user, setUser] = useState({});
   const [error, setError] = useState("");
+
+  useState(() => {
+    if (localStorage.getItem("token")) {
+      checkAuth().then((res) => {
+        if (res) {
+          // dispatch({ type: "LOG_IN" });
+          localStorage.setItem("isAuth", "true");
+          window.location.href = "/";
+        }
+      });
+    }
+    // eslint-disable-next-line
+  }, []);
 
   async function loginUser() {
     await login(user)
       .then((response) => {
         console.log(response);
         localStorage.setItem("token", response.data.accessToken);
-        // dispatch({ type: "LOG_IN" });
+        // dispath({ type: "LOG_IN" });
         localStorage.setItem("isAuth", "true");
+        window.location.href = "/";
       })
       .catch((err) => {
         console.log(err.response);
