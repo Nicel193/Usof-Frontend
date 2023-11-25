@@ -1,6 +1,6 @@
-import "./Profile.scss";
+import "./styles/Profile.scss";
 
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import Post from "../components/Post";
 
@@ -8,7 +8,7 @@ import { UilPlus } from "@iconscout/react-unicons";
 import { UilAt } from "@iconscout/react-unicons";
 import { UilAdjustHalf } from "@iconscout/react-unicons";
 
-const Profile = ({ prop1, prop2 }) => {
+const Profile = () => {
   return (
     <div>
       <Header />

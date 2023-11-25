@@ -1,4 +1,4 @@
-import "./Main.scss";
+import "./styles/Main.scss";
 
 import React from "react";
 import Header from "../components/Header";
@@ -10,7 +10,6 @@ import { UilChannel } from "@iconscout/react-unicons";
 import { getPosts } from "../api/getPosts";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import axios from "axios";
 
 const Main = () => {
   const [posts, setPosts] = useState([]);
