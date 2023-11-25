@@ -2,19 +2,26 @@ import React, { useState } from "react";
 import { UilUser, UilLock } from "@iconscout/react-unicons";
 import { login } from "../../api/auth";
 import checkAuth from "../../services/authService";
+import { useDispatch, useSelector } from "react-redux";
+import { changeAuth } from "../../store/authSlice";
+import { Navigate } from "react-router-dom";
 
 const Login = () => {
+  const isAuth = useSelector((state) => state.auth.authorizationStatus);
+  const dispatch = useDispatch();
+
   const [user, setUser] = useState({});
   const [error, setError] = useState("");
+
+  function successfulAuth() {
+    dispatch(changeAuth(true));
+    localStorage.setItem("isAuth", "true");
+  }
 
   useState(() => {
     if (localStorage.getItem("token")) {
       checkAuth().then((res) => {
-        if (res) {
-          // dispatch({ type: "LOG_IN" });
-          localStorage.setItem("isAuth", "true");
-          window.location.href = "/";
-        }
+        if (res) successfulAuth();
       });
     }
     // eslint-disable-next-line
@@ -25,14 +32,16 @@ const Login = () => {
       .then((response) => {
         console.log(response);
         localStorage.setItem("token", response.data.accessToken);
-        // dispath({ type: "LOG_IN" });
-        localStorage.setItem("isAuth", "true");
-        window.location.href = "/";
+        successfulAuth();
       })
       .catch((err) => {
         console.log(err.response);
         setError(err.response.data);
       });
+  }
+
+  if (isAuth) {
+    return <Navigate to={"/"} />;
   }
 
   return (
@@ -69,14 +78,6 @@ const Login = () => {
           />
         </div>
       </form>
-      <div className="login-signup">
-        <span className="text">
-          Not a member?
-          {/* <a href="#" className="text signup-link" onClick={setTab}> */}
-          {/* Signup Now */}
-          {/* </a> */}
-        </span>
-      </div>
     </div>
   );
 };

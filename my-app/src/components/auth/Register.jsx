@@ -84,14 +84,6 @@ const Register = () => {
           <input type="button" onClick={registerUser} value="Register" />
         </div>
       </form>
-      <div className="login-signup">
-        {/* <span className="text">
-          Already a member?
-          <a href="#" className="text login-link" onClick={setTab}>
-            Login Now
-          </a>
-        </span> */}
-      </div>
     </div>
   );
 };

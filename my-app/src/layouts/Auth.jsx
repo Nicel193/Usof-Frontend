@@ -14,20 +14,20 @@ const Auth = () => {
 
   return (
     <div className="authStyle">
-      {" "}
       <div className={`container ${activeTab ? "active" : ""}`}>
         <div className="forms">
           <Login />
           <Register />
         </div>
-        {/* <div className="login-signup">
+
+        <div className="login-signup">
           <span className="text">
-            Not a member?
-            <a href="#" className="text signup-link" onClick={setTab}>
-              Signup Now
-            </a>
+            {!activeTab ? "Not a member?" : "Already a member?"}
+            <span className="text signup-link" onClick={setTab}>
+              {!activeTab ? "Register now" : "Login now"}
+            </span>
           </span>
-        </div> */}
+        </div>
       </div>
     </div>
   );

@@ -1,11 +1,22 @@
 import "./Header.scss";
 import React from "react";
 
+import { useSelector } from "react-redux";
+
 const Header = () => {
+  const isAuth = useSelector((state) => state.auth.authorizationStatus);
+
+  console.log(isAuth);
+
   return (
     <div>
       <header>
-        <div className="headerLeft" onClick={() => {window.location.href = '/'}}>
+        <div
+          className="headerLeft"
+          onClick={() => {
+            window.location.href = "/";
+          }}
+        >
           <svg
             fill="#000000"
             width="30px"
@@ -17,18 +28,25 @@ const Header = () => {
           </svg>
           <h3>Reboot</h3>
         </div>
-        {/* <div className="headerRight">
-          <button className="signIn">Sign In</button>
-          <button className="logIn">Log In</button>
-        </div> */}
         <div className="headerRight">
-          <span>Nicel</span>
-          <img
-            width={35}
-            height={35}
-            src="https://icons-for-free.com/iconfiles/png/512/business+costume+male+man+office+user+icon-1320196264882354682.png"
-            alt="ProfileIcon"
-          />
+          {!isAuth ? (
+            <>
+              {" "}
+              <button className="signIn">Sign In</button>
+              <button className="logIn">Log In</button>
+            </>
+          ) : (
+            <>
+              {" "}
+              <span>Nicel</span>
+              <img
+                width={35}
+                height={35}
+                src="https://icons-for-free.com/iconfiles/png/512/business+costume+male+man+office+user+icon-1320196264882354682.png"
+                alt="ProfileIcon"
+              />{" "}
+            </>
+          )}
         </div>
       </header>
       <div class="underline"></div>
