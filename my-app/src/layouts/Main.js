@@ -79,6 +79,7 @@ const Main = () => {
                 title={post.title}
                 content={post.content}
                 categories={post.categories}
+                publishDate={post.publishDate}
               />
             ))
           ) : (

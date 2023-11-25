@@ -11,7 +11,11 @@
     span {
       margin-left: 5px;
       color: #505f98;
-      font-weight: 500;
+      // font-weight: 500;
+    }
+
+    .publishDate {
+      color: rgba(80, 95, 152, 0.50);
     }
   }
 
@@ -19,11 +23,18 @@
     margin-top: 5px;
     margin-bottom: 5px;
     color: #091133;
+    font-size: 17px;
+    font-weight: bold;
   }
 
-  .like-dislike-container {
+  span{
+    color: #505F98;
+    font-size: 15px;
+  }
+
+  .action-container {
     background-color: #e7ecff;
-    margin-top: 5px;
+    margin-top: 13px;
     font-size: 20px;
     border-radius: 25px;
     padding-top: 3px;
@@ -41,5 +52,9 @@
     .icon:hover {
       color: #091133;
     }
+  }
+
+  .comment{
+    margin-left: 5px;
   }
 }
