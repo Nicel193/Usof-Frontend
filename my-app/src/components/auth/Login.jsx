@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { UilUser, UilLock } from "@iconscout/react-unicons";
 import { login } from "../../api/auth";
-import checkAuth from "../../services/authService";
 import { useDispatch, useSelector } from "react-redux";
 import { changeAuth } from "../../store/authSlice";
 import { Navigate } from "react-router-dom";
@@ -13,18 +12,11 @@ const Login = () => {
   const [user, setUser] = useState({});
   const [error, setError] = useState("");
 
+  //TODO: Dublicate
   function successfulAuth() {
     dispatch(changeAuth(true));
     localStorage.setItem("isAuth", "true");
   }
-
-  useState(() => {
-    if (localStorage.getItem("token")) {
-      checkAuth().then((res) => {
-        if (res) successfulAuth();
-      });
-    }
-  }, []);
 
   async function loginUser() {
     await login(user)

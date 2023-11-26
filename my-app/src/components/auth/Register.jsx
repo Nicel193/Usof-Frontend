@@ -3,26 +3,26 @@ import { register } from "../../api/auth";
 import { UilUser, UilLock, UilEnvelope } from "@iconscout/react-unicons";
 
 const Register = () => {
-    const [user, setUser] = useState({});
-    const [additionalPassword, setAdditionalPassword] = useState("");
-    const [error, setError] = useState("");
-  
-    async function registerUser() {
-      if (user.pass !== additionalPassword) {
-        console.log.error("Passwords don't match");
-      }
-  
-      await register(user)
-        .then((response) => {
-          console.log(response);
-          localStorage.setItem("token", response.data.accessToken);
-          window.location.href = "/auth"
-        })
-        .catch((err) => {
-          console.log(err.response);
-          setError("ERROR");
-        });
+  const [user, setUser] = useState({});
+  const [additionalPassword, setAdditionalPassword] = useState("");
+  const [error, setError] = useState("");
+
+  async function registerUser() {
+    if (user.pass !== additionalPassword) {
+      console.log.error("Passwords don't match");
     }
+
+    await register(user)
+      .then((response) => {
+        console.log(response);
+        localStorage.setItem("token", response.data.accessToken);
+        window.location.href = "/auth";
+      })
+      .catch((err) => {
+        console.log(err.response);
+        setError("ERROR");
+      });
+  }
 
   return (
     <div className="form signup">

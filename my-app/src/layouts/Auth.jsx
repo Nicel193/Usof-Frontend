@@ -12,7 +12,7 @@ const Auth = () => {
   const [activeTab, setActiveTab] = useState(false);
 
   useEffect(() => {
-    setActiveTab(state === 'register');
+    setActiveTab(state === 'login');
   }, []); 
 
   function setTab() {

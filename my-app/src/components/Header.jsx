@@ -7,8 +7,6 @@ import { Link } from "react-router-dom";
 const Header = () => {
   const isAuth = useSelector((state) => state.auth.authorizationStatus);
 
-  console.log(isAuth);
-
   return (
     <div>
       <header>
