@@ -8,8 +8,6 @@ const Header = () => {
   const isAuth = useSelector((state) => state.auth.authorizationStatus);
   const userData = useSelector((state) => state.auth.userData);
 
-  console.log(userData);
-
   return (
     <div>
       <header>

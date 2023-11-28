@@ -41,7 +41,7 @@ const Main = () => {
         <div>
           <Link to="/profile" className="text-link flex-center home chose">
             <UilUser size="32" color="#505f98" />
-            <span>profile</span>
+            <span>Profile</span>
           </Link>
         </div>
         <div class="underline"></div>
