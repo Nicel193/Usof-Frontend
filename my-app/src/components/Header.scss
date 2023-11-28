@@ -19,11 +19,6 @@ header {
   margin-top: 3px;
   margin-bottom: 3px;
 
-  svg {
-    fill: linear-gradient(45deg, #505f98, #fff);
-    animation: colorChange 3s infinite alternate;
-  }
-
   @keyframes colorChange {
     0% {
       fill: #505f98;
@@ -36,6 +31,11 @@ header {
   .headerLeft {
     display: flex;
     align-items: center;
+
+    svg {
+      fill: linear-gradient(45deg, #505f98, #fff);
+      animation: colorChange 3s infinite alternate;
+    }
 
     h3 {
       margin-left: 2px;
@@ -50,10 +50,19 @@ header {
   .headerRight {
     display: flex;
     align-items: center;
+    color: #505f98;
+
+    .logout {
+      background-color: transparent;
+      border: none;
+
+      svg {
+        color: #505f98;
+      }
+    }
 
     span {
       margin-right: 5px;
-      color: #505f98;
       font-weight: 450;
     }
   }

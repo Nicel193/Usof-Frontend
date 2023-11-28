@@ -1,12 +1,28 @@
 import "./Header.scss";
 import React, { useEffect } from "react";
 
-import { useSelector } from "react-redux";
+import { UilSignout } from "@iconscout/react-unicons";
+
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { logout } from "../api/auth";
+import { changeAuth } from "../store/authSlice";
 
 const Header = () => {
   const isAuth = useSelector((state) => state.auth.authorizationStatus);
   const userData = useSelector((state) => state.auth.userData);
+  const dispatch = useDispatch();
+
+  async function onLogout() {
+    await logout()
+      .then()
+      .catch((e) => console.log(e));
+    dispatch(changeAuth(false));
+    localStorage.setItem("isAuth", "false");
+    localStorage.removeItem("token");
+
+    window.location.reload();
+  }
 
   return (
     <div>
@@ -26,7 +42,7 @@ const Header = () => {
           </div>
         </Link>
         <div className="headerRight">
-          {(!isAuth || !userData) ? (
+          {!isAuth || !userData ? (
             <>
               <Link to={{ pathname: "/auth", search: "?state=login" }}>
                 <button className="signIn">Sign In</button>
@@ -44,6 +60,9 @@ const Header = () => {
                 src="https://icons-for-free.com/iconfiles/png/512/business+costume+male+man+office+user+icon-1320196264882354682.png"
                 alt="ProfileIcon"
               />
+              <button className="logout" onClick={onLogout}>
+                <UilSignout />
+              </button>
             </>
           )}
         </div>
