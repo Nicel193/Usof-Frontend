@@ -19,8 +19,8 @@ export default async function checkAuth() {
 
     return response.data;
   } catch (e) {
-    console.log(e.response);
     
+    console.log(e.response);
     return null;
   }
 }

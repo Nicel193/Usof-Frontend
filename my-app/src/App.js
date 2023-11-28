@@ -20,8 +20,6 @@ const App = () => {
   }
 
   useEffect(() => {
-    console.log("isAuth:");
-
     const storedUserData = localStorage.getItem('isAuth');
     if (storedUserData === "true" && isAuth === false) {
       if (localStorage.getItem("token")) {

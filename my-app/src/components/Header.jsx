@@ -1,5 +1,5 @@
 import "./Header.scss";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -26,7 +26,7 @@ const Header = () => {
           </div>
         </Link>
         <div className="headerRight">
-          {(!isAuth && !userData) ? (
+          {(!isAuth || !userData) ? (
             <>
               <Link to={{ pathname: "/auth", search: "?state=login" }}>
                 <button className="signIn">Sign In</button>

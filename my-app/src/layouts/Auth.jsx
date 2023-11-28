@@ -28,7 +28,7 @@ const Auth = () => {
 
         <div className="login-signup">
           <span className="text">
-            {!activeTab ? "Not a member?" : "Already a member?"}
+            {(!activeTab ? "Not a member?" : "Already a member?") + '|'}
             <span className="text signup-link" onClick={setTab}>
               {!activeTab ? "Register now" : "Login now"}
             </span>
