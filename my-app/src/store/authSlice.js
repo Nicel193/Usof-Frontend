@@ -4,29 +4,18 @@ const authSlice = createSlice({
   name: "authorizationStatus",
   initialState: {
     authorizationStatus: false,
+    userData: null
   },
   reducers: {
     changeAuth(state, action) {
       state.authorizationStatus = action.payload;
     },
+    setUserData(state, action){
+      state.userData = action.payload.data;
+    }
   },
 });
 
-export const { changeAuth } = authSlice.actions;
+export const { changeAuth, setUserData } = authSlice.actions;
 
 export default authSlice.reducer;
-
-// const defaultState = {
-//   authorizationStatus: false,
-// };
-
-// export default function authReducer(state = defaultState, action) {
-//   switch (action.type) {
-//     case "LOG_IN":
-//       return { ...state, authorizationStatus: true };
-//     case "LOG_OUT":
-//       return { ...state, authorizationStatus: false };
-//     default:
-//       return state;
-//   }
-// }

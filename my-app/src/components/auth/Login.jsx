@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { UilUser, UilLock } from "@iconscout/react-unicons";
 import { login } from "../../api/auth";
 import { useDispatch, useSelector } from "react-redux";
-import { changeAuth } from "../../store/authSlice";
+import { changeAuth, setUserData } from "../../store/authSlice";
 import { Navigate } from "react-router-dom";
 
 const Login = () => {
@@ -13,8 +13,9 @@ const Login = () => {
   const [error, setError] = useState("");
 
   //TODO: Dublicate
-  function successfulAuth() {
+  function successfulAuth(res) {
     dispatch(changeAuth(true));
+    dispatch(setUserData(res));
     localStorage.setItem("isAuth", "true");
   }
 
@@ -23,7 +24,7 @@ const Login = () => {
       .then((response) => {
         console.log(response);
         localStorage.setItem("token", response.data.accessToken);
-        successfulAuth();
+        successfulAuth(response);
       })
       .catch((err) => {
         console.log(err.response);

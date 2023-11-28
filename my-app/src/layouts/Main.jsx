@@ -9,7 +9,7 @@ import { UilChannel } from "@iconscout/react-unicons";
 
 import { getPosts } from "../api/getPosts";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 const Main = () => {
   const [posts, setPosts] = useState([]);
@@ -38,14 +38,11 @@ const Main = () => {
           <UilHome size="32" color="#505f98" />
           <span>Home</span>
         </div>
-        <div
-          className="flex-center home chose"
-          onClick={() => {
-            window.location.href = "/profile";
-          }}
-        >
-          <UilUser size="32" color="#505f98" />
-          <span>Profile</span>
+        <div>
+          <Link to="/profile" className="text-link flex-center home chose">
+            <UilUser size="32" color="#505f98" />
+            <span>profile</span>
+          </Link>
         </div>
         <div class="underline"></div>
         <div>

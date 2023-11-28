@@ -8,15 +8,19 @@ export default async function checkAuth() {
       },
       withCredentials: true,
     };
+
     const response = await axios.get(
       "http://localhost:3001/api/auth/refresh",
       config
     );
+
     console.log(response);
     localStorage.setItem("token", response.data.accessToken);
-    return true;
+
+    return response.data;
   } catch (e) {
     console.log(e.response);
-    return false;
+    
+    return null;
   }
 }

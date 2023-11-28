@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { UilUser, UilLock } from "@iconscout/react-unicons";
 import Register from "../components/auth/Register";
 import Login from "../components/auth/Login";
 import { useLocation } from "react-router-dom";
