@@ -11,21 +11,6 @@ section {
     display: flex;
     flex-direction: column;
 
-    .postButton {
-      background-color: #6d70b3;
-      border: #e7ecff;
-      margin-top: 5px;
-      font-size: 20px;
-      border-radius: 25px;
-      padding-top: 3px;
-      padding-bottom: 3px;
-      padding-left: 35px;
-      padding-right: 35px;
-      align-self: flex-end;
-
-      color: #e7ecff;
-    }
-
     .yourPostsText {
       margin-top: 5px;
       align-self: center;
@@ -88,6 +73,21 @@ section {
 
         color: #505f98;
       }
+    }
+
+    .postButton {
+      background-color: #6d70b3;
+      border: #e7ecff;
+      margin-top: 5px;
+      font-size: 20px;
+      border-radius: 25px;
+      padding-top: 3px;
+      padding-bottom: 3px;
+      padding-left: 35px;
+      padding-right: 35px;
+      float: right;
+
+      color: #e7ecff;
     }
   }
 

@@ -2,7 +2,7 @@ import "./styles/Main.scss";
 
 import React from "react";
 import Header from "../components/Header";
-import Post from "../components/Post";
+import Post from "../components/post/Post";
 import { UilHome, UilUser } from "@iconscout/react-unicons";
 import { UilAngleDown } from "@iconscout/react-unicons";
 import { UilChannel } from "@iconscout/react-unicons";

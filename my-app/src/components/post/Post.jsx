@@ -1,4 +1,4 @@
-import "./Post.scss";
+import "../Post.scss";
 import React from "react";
 
 import { UilThumbsUp } from "@iconscout/react-unicons";
