@@ -10,7 +10,7 @@ import Auth from "./layouts/Auth";
 import Profile from "./layouts/Profile";
 
 const App = () => {
-  const isAuth = useSelector ((state) => state.auth.authorizationStatus);
+  const isAuth = useSelector((state) => state.auth.authorizationStatus);
   const dispatch = useDispatch();
 
   function successfulAuth(res) {
@@ -20,7 +20,7 @@ const App = () => {
   }
 
   useEffect(() => {
-    const storedUserData = localStorage.getItem('isAuth');
+    const storedUserData = localStorage.getItem("isAuth");
     if (storedUserData === "true" && isAuth === false) {
       if (localStorage.getItem("token")) {
         checkAuth().then((res) => {
@@ -28,6 +28,7 @@ const App = () => {
         });
       }
     }
+    //eslint-disable-next-line
   }, []);
 
   return (

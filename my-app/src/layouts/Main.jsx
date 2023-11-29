@@ -4,31 +4,53 @@ import React from "react";
 import Header from "../components/Header";
 import Post from "../components/post/Post";
 import { UilHome, UilUser } from "@iconscout/react-unicons";
-import { UilAngleDown } from "@iconscout/react-unicons";
-import { UilChannel } from "@iconscout/react-unicons";
+import { UilAngleDown, UilAngleUp } from "@iconscout/react-unicons";
 
 import { getPosts } from "../api/getPosts";
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { getCategories } from "../api/category";
+
+import Category from "../components/Category";
+import PageList from "../components/PageList";
+
+const MaxPagePostCount = 10;
 
 const Main = () => {
+  const [isShowCategoty, setShowCategoty] = useState(true);
+  const [totalPages, setTotalPages] = useState(1);
   const [posts, setPosts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    if (!searchParams.has("page")) {
-      setSearchParams({ page: "1" });
-    }
-    async function fetchData() {
-      const response = await getPosts(searchParams.toString());
+    async function fetchCategoriesData() {
+      const response = await getCategories();
       console.log(response);
-      setPosts(response.data);
+      setCategories(response.data);
     }
-    fetchData()
+
+    fetchCategoriesData()
+      .then()
+      .catch((e) => console.log(e));
+  }, []);
+
+  useEffect(() => {
+    async function fetchPostsData() {
+      const response = await getPosts(searchParams.toString());
+
+      setPosts(response.data.posts);
+      setTotalPages(response.data.totalPages);
+    }
+    fetchPostsData()
       .then()
       .catch((e) => console.log(e));
     //eslint-disable-next-line
   }, [searchParams]);
+
+  function drawCategoryList() {
+    setShowCategoty(!isShowCategoty);
+  }
 
   return (
     <div>
@@ -46,22 +68,22 @@ const Main = () => {
         </div>
         <div class="underline"></div>
         <div>
-          <div className="flex-center categories">
+          <div onClick={drawCategoryList} className="flex-center categories">
             <span>Categories</span>
-            <UilAngleDown size="32" color="#505f98" />
+            {!isShowCategoty ? (
+              <UilAngleDown size="32" color="#505f98" />
+            ) : (
+              <UilAngleUp size="32" color="#505f98" />
+            )}
           </div>
-          <div className="flex-center category chose">
-            <UilChannel size="32" color="#505f98" />
-            <span>Game</span>
-          </div>
-          <div className="flex-center category chose">
-            <UilChannel size="32" color="#505f98" />
-            <span>Animals</span>
-          </div>
-          <div className="flex-center category chose">
-            <UilChannel size="32" color="#505f98" />
-            <span>Cars</span>
-          </div>
+          {isShowCategoty &&
+            (categories.length > 0 ? (
+              categories.map((category) => (
+                <Category id={category.id} title={category.title} />
+              ))
+            ) : (
+              <div style={{ fontSize: "32px" }}>Category not found</div>
+            ))}
         </div>
         <div class="underline"></div>
       </aside>
@@ -80,6 +102,10 @@ const Main = () => {
             ))
           ) : (
             <div style={{ fontSize: "32px" }}>Posts not found</div>
+          )}
+
+          {(posts.length >= MaxPagePostCount || totalPages > 1) && (
+            <PageList totalPages={totalPages} />
           )}
         </div>
       </section>

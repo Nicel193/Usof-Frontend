@@ -30,7 +30,7 @@ const Profile = () => {
         searchParams.toString()
       );
       console.log(response);
-      setPosts(response.data);
+      setPosts(response.data.posts);
     }
 
     fetchData()

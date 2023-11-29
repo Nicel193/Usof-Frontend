@@ -56,7 +56,40 @@ section {
   flex-direction: column;
   align-items: center;
 
-  .posts{
+  .posts {
     width: 80%;
+  }
+
+  .pageList {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+
+    .page {
+      background-color: #f8fbff;
+      border: double #e7ecff;
+      padding: 5px;
+      margin-left: 5px;
+      border-radius: 2px;
+    }
+
+    .page:hover{
+      background-color: #e7ecff;
+      border: double #f8fbff;
+    }
+
+    .selected {
+      background-color: #505f98;
+      border: double #f8fbff;
+      span {
+        color: #e7ecff;
+      }
+    }
+
+    span {
+      color: #505f98;
+      font-size: 15px;
+    }
   }
 }
