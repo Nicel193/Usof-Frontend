@@ -21,7 +21,7 @@ const Main = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     async function fetchCategoriesData() {
@@ -93,6 +93,7 @@ const Main = () => {
           {posts.length > 0 ? (
             posts.map((post) => (
               <Post
+                postId={post.id}
                 authorLogin={post.authorLogin}
                 title={post.title}
                 content={post.content}
