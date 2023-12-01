@@ -1,5 +1,6 @@
 import "../Post.scss";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import { UilThumbsUp } from "@iconscout/react-unicons";
 import { UilThumbsDown } from "@iconscout/react-unicons";
@@ -9,13 +10,21 @@ import { deletePostLike, getPostLikes, setPostLike } from "../../api/like";
 const Post = (props) => {
   const { postId } = props;
 
-  const [postLikes, setPostLikes] = useState([]);
+  const [postGrade, setPostGrade] = useState(0);
   const [likeType, setLikeType] = useState("");
+  const [userGrade, setUserGrade] = useState(null);
+
+  const userData = useSelector((state) => state.auth.userData);
 
   useEffect(() => {
     async function fetchLikesData() {
       const response = await getPostLikes(postId);
-      setPostLikes(response.data);
+      const likes = response.data.likes;
+      const dislikes = response.data.dislikes;
+      const userGrade = [...likes, ...dislikes].filter((like) => like.login === userData.login);
+
+      setPostGrade(likes.length - dislikes.length);
+      setUserGrade(userGrade[0]);
     }
 
     fetchLikesData()
@@ -47,6 +56,12 @@ const Post = (props) => {
     return `${day}.${month}.${year}`;
   }
 
+  function getLikeClassName(iconLikeType) {
+    if (userGrade &&  userGrade.likeType === iconLikeType) return "selected-icon";
+
+    return "icon"
+  }
+
   return (
     <div className="post">
       <div class="flex-center">
@@ -67,12 +82,19 @@ const Post = (props) => {
       <div></div>
       <div className="flex-center action-container">
         <button className="transparent-button" onClick={() => setLike("like")}>
-          <UilThumbsUp className="icon" />
+          <UilThumbsUp
+            className={getLikeClassName("like")}
+          />
         </button>
-        <button className="transparent-button" onClick={() => setLike("dislike")}>
-          <UilThumbsDown className="icon" />
+        <button
+          className="transparent-button"
+          onClick={() => setLike("dislike")}
+        >
+          <UilThumbsDown
+            className={getLikeClassName("dislike")}
+          />
         </button>
-        <span>{postLikes.length}</span>
+        <span>{postGrade}</span>
       </div>
       <div className="flex-center action-container comment">
         <UilCommentLines className="icon" />
