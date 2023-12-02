@@ -1,22 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createPost } from "../../api/createPost";
-import { UilPlus } from "@iconscout/react-unicons";
+import { UilMultiply } from "@iconscout/react-unicons";
+import { getCategories } from "../../api/category";
+import Select, { components } from "react-select";
+import Category from "../Category";
 
 const WriteblePostField = (props) => {
-  const [post, setPost] = useState({ title: "", content: "", categories: [2] });
+  const [post, setPost] = useState({ title: "", content: "", categories: [] });
+  const [categories, setCategories] = useState([]);
+  const [selectedOption, setSelectedOption] = useState(null);
+
+
   const { setShouldUpdatePosts } = props;
 
   const shareNewPost = async () => {
     try {
+      post.categories = selectedOption.map(
+        (option) => option.value.id);
+
       const response = await createPost(post);
       console.log(response);
       setShouldUpdatePosts(true);
-      setPost({ title: "", content: "", categories: [2] });
+      setPost({ title: "", content: "", categories: [0] });
     } catch (error) {
       console.log(error);
     }
   };
-  
+
+  useEffect(() => {
+    async function fetchPostsData() {
+      const response = await getCategories();
+      setCategories(response.data);
+    }
+    fetchPostsData()
+      .then()
+      .catch((e) => console.log(e));
+  }, []);
+
+  // function selectCategory(category) {
+  //   setSelectedCategories((prevSet) => {
+  //     const newSet = new Set(prevSet);
+  //     newSet.add(category);
+  //     return newSet;
+  //   });
+  // }
+
+  const handleChange = (selectedOption) => {
+    setSelectedOption(selectedOption);
+  };
 
   return (
     <div className="newPost">
@@ -33,12 +64,14 @@ const WriteblePostField = (props) => {
           cols="50"
           placeholder="Contetent"
         ></textarea>
-        <div className="categories">
-          <button className="category">
-            <UilPlus />
-            <span>Animals</span>
-          </button>
-        </div>
+        <Select
+          className="select"
+          value={selectedOption}
+          options={categories.map((category) => ({ value: category, label: category.title }))}
+          onChange={handleChange}
+          closeMenuOnSelect={false}
+          isMulti
+        />
       </div>
       <button className="postButton" onClick={shareNewPost}>
         Post

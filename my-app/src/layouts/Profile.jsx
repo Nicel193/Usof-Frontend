@@ -11,6 +11,7 @@ import { useSearchParams } from "react-router-dom";
 import { getPostsByUserId } from "../api/getPosts";
 import WriteblePostField from "../components/post/WriteblePostField";
 import PageList from "../components/PageList";
+import { deletePostById } from "../api/createPost";
 
 const Profile = () => {
   const userData = useSelector((state) => state.auth.userData);
@@ -45,24 +46,34 @@ const Profile = () => {
     //eslint-disable-next-line
   }, [userData, searchParams, shouldUpdatePosts]);
 
+  async function deletePost(postId) {
+    await deletePostById(postId)
+      .then(() => setShouldUpdatePosts(true))
+      .catch((e) => console.log(e));
+  }
+
   return (
     <div>
       <Header />
       <section>
         <div className="postContent">
-        <WriteblePostField setShouldUpdatePosts={setShouldUpdatePosts} />
+          <WriteblePostField setShouldUpdatePosts={setShouldUpdatePosts} />
           <span className="yourPostsText">Your Posts</span>
           <div class="underline"></div>
           {posts.length > 0 ? (
             posts.map((post) => (
-              <Post
-                postId={post.id}
-                authorLogin={post.authorLogin}
-                title={post.title}
-                content={post.content}
-                categories={post.categories}
-                publishDate={post.publishDate}
-              />
+              <div>
+                <Post
+                  postId={post.id}
+                  authorLogin={post.authorLogin}
+                  title={post.title}
+                  content={post.content}
+                  categories={post.categories}
+                  publishDate={post.publishDate}
+                />
+                <button onClick={() => deletePost(post.id)}>Delete</button>
+                <button onClick={() => {}}>Edit</button>
+              </div>
             ))
           ) : (
             <div style={{ fontSize: "32px" }}>Posts not found</div>

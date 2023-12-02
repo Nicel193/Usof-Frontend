@@ -2,11 +2,8 @@ import "../Post.scss";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import { UilThumbsUp } from "@iconscout/react-unicons";
-import { UilThumbsDown } from "@iconscout/react-unicons";
-import { UilCommentLines } from "@iconscout/react-unicons";
+import { UilThumbsUp,  UilThumbsDown, UilCommentLines } from "@iconscout/react-unicons";
 import { deletePostLike, getPostLikes, setPostLike } from "../../api/like";
-import { useSearchParams } from "react-router-dom";
 
 const Post = (props) => {
   const { postId } = props;
@@ -14,31 +11,30 @@ const Post = (props) => {
   const [postGrade, setPostGrade] = useState(0);
   const [likeType, setLikeType] = useState("");
   const [userGrade, setUserGrade] = useState(null);
-  const [searchParams] = useSearchParams();
 
   const userData = useSelector((state) => state.auth.userData);
 
-  useEffect(() => {
-    async function fetchLikesData() {
-      const response = await getPostLikes(postId);
-      const likes = response.data.likes;
-      const dislikes = response.data.dislikes;
+  // useEffect(() => {
+  //   async function fetchLikesData() {
+  //     const response = await getPostLikes(postId);
+  //     const likes = response.data.likes;
+  //     const dislikes = response.data.dislikes;
 
-      setPostGrade(likes.length - dislikes.length);
+  //     setPostGrade(likes.length - dislikes.length);
 
-      if (userData) {
-        const userGrade = [...likes, ...dislikes].filter(
-          (like) => like.login === userData.login
-        );
-        setLikeType(userGrade[0].likeType)
-        setUserGrade(userGrade[0]);
-      }
-    }
+  //     if (userData) {
+  //       const userGrade = [...likes, ...dislikes].filter(
+  //         (like) => like.login === userData.login
+  //       );
+  //       setLikeType(userGrade[0].likeType)
+  //       setUserGrade(userGrade[0]);
+  //     }
+  //   }
 
-    fetchLikesData()
-      .then()
-      .catch((e) => console.log(e));
-  });
+  //   fetchLikesData()
+  //     .then()
+  //     .catch((e) => console.log(e));
+  // });
 
   function setLike(type) {
     if (likeType === type) {
