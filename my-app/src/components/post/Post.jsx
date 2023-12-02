@@ -68,6 +68,13 @@ const Post = (props) => {
     return "icon";
   }
 
+  function getParsCategories(categories) {
+    const wordsArray = categories.split(', ');
+    const wordsWithHash = wordsArray.map((word) => `#${word}`);
+  
+    return wordsWithHash.join(' ');
+  }
+
   return (
     <div className="post">
       <div class="flex-center">
@@ -84,7 +91,7 @@ const Post = (props) => {
         </span>
       </div>
       <h4>{`"${props.title}"`}</h4>
-      <span>{`${props.content} #${props.categories}`}</span>
+      <span>{`${props.content} ${getParsCategories(props.categories)}`}</span>
       <div></div>
       <div className="flex-center action-container">
         <button className="transparent-button" onClick={() => setLike("like")}>
