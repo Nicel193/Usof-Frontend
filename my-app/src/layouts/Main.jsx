@@ -104,10 +104,7 @@ const Main = () => {
           ) : (
             <div style={{ fontSize: "32px" }}>Posts not found</div>
           )}
-
-          {(posts.length >= MaxPagePostCount || totalPages > 1) && (
-            <PageList totalPages={totalPages} />
-          )}
+          <PageList postsLength={posts.length} totalPages={totalPages} />
         </div>
       </section>
 

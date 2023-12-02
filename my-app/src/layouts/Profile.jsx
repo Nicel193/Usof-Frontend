@@ -10,11 +10,13 @@ import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { getPostsByUserId } from "../api/getPosts";
 import WriteblePostField from "../components/post/WriteblePostField";
+import PageList from "../components/PageList";
 
 const Profile = () => {
   const userData = useSelector((state) => state.auth.userData);
 
   const [shouldUpdatePosts, setShouldUpdatePosts] = useState(true);
+  const [totalPages, setTotalPages] = useState(1);
   const [posts, setPosts] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -29,8 +31,9 @@ const Profile = () => {
         userData.id,
         searchParams.toString()
       );
-      console.log(response);
+
       setPosts(response.data.posts);
+      setTotalPages(response.data.totalPages);
     }
 
     fetchData()
@@ -53,6 +56,7 @@ const Profile = () => {
           {posts.length > 0 ? (
             posts.map((post) => (
               <Post
+                postId={post.id}
                 authorLogin={post.authorLogin}
                 title={post.title}
                 content={post.content}
@@ -63,6 +67,7 @@ const Profile = () => {
           ) : (
             <div style={{ fontSize: "32px" }}>Posts not found</div>
           )}
+          <PageList postsLength={posts.length} totalPages={totalPages} />
         </div>
         <ProfileInfo />
       </section>

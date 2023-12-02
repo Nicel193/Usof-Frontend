@@ -6,6 +6,7 @@ import { UilThumbsUp } from "@iconscout/react-unicons";
 import { UilThumbsDown } from "@iconscout/react-unicons";
 import { UilCommentLines } from "@iconscout/react-unicons";
 import { deletePostLike, getPostLikes, setPostLike } from "../../api/like";
+import { useSearchParams } from "react-router-dom";
 
 const Post = (props) => {
   const { postId } = props;
@@ -13,6 +14,7 @@ const Post = (props) => {
   const [postGrade, setPostGrade] = useState(0);
   const [likeType, setLikeType] = useState("");
   const [userGrade, setUserGrade] = useState(null);
+  const [searchParams] = useSearchParams();
 
   const userData = useSelector((state) => state.auth.userData);
 
@@ -21,16 +23,22 @@ const Post = (props) => {
       const response = await getPostLikes(postId);
       const likes = response.data.likes;
       const dislikes = response.data.dislikes;
-      const userGrade = [...likes, ...dislikes].filter((like) => like.login === userData.login);
 
       setPostGrade(likes.length - dislikes.length);
-      setUserGrade(userGrade[0]);
+
+      if (userData) {
+        const userGrade = [...likes, ...dislikes].filter(
+          (like) => like.login === userData.login
+        );
+        setLikeType(userGrade[0].likeType)
+        setUserGrade(userGrade[0]);
+      }
     }
 
     fetchLikesData()
       .then()
       .catch((e) => console.log(e));
-  }, [likeType]);
+  });
 
   function setLike(type) {
     if (likeType === type) {
@@ -44,6 +52,7 @@ const Post = (props) => {
     setPostLike(postId, type)
       .then(() => {
         setLikeType(type);
+        setUserGrade(type);
       })
       .catch((e) => console.log(e));
   }
@@ -57,9 +66,10 @@ const Post = (props) => {
   }
 
   function getLikeClassName(iconLikeType) {
-    if (userGrade &&  userGrade.likeType === iconLikeType) return "selected-icon";
+    if (userGrade && userGrade.likeType === iconLikeType)
+      return "selected-icon";
 
-    return "icon"
+    return "icon";
   }
 
   return (
@@ -82,17 +92,13 @@ const Post = (props) => {
       <div></div>
       <div className="flex-center action-container">
         <button className="transparent-button" onClick={() => setLike("like")}>
-          <UilThumbsUp
-            className={getLikeClassName("like")}
-          />
+          <UilThumbsUp className={getLikeClassName("like")} />
         </button>
         <button
           className="transparent-button"
           onClick={() => setLike("dislike")}
         >
-          <UilThumbsDown
-            className={getLikeClassName("dislike")}
-          />
+          <UilThumbsDown className={getLikeClassName("dislike")} />
         </button>
         <span>{postGrade}</span>
       </div>

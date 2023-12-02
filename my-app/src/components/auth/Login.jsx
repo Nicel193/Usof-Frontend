@@ -1,30 +1,24 @@
 import React, { useState } from "react";
 import { UilUser, UilLock } from "@iconscout/react-unicons";
 import { login } from "../../api/auth";
-import { useDispatch, useSelector } from "react-redux";
-import { changeAuth, setUserData } from "../../store/authSlice";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/authSlice";
 import { Navigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 const Login = () => {
-  const isAuth = useSelector((state) => state.auth.authorizationStatus);
+  const { isAuth } = useAuth();
   const dispatch = useDispatch();
 
-  const [user, setUser] = useState({});
+  const [userAuthData, setUserAuthData] = useState({});
   const [error, setError] = useState("");
 
-  //TODO: Dublicate
-  function successfulAuth(res) {
-    dispatch(changeAuth(true));
-    dispatch(setUserData(res));
-    localStorage.setItem("isAuth", "true");
-  }
-
   async function loginUser() {
-    await login(user)
+    await login(userAuthData)
       .then((response) => {
         console.log(response);
         localStorage.setItem("token", response.data.accessToken);
-        successfulAuth(response);
+        dispatch(setUser(response.data));
       })
       .catch((err) => {
         console.log(err.response);
@@ -45,7 +39,9 @@ const Login = () => {
             type="text"
             id="loginName"
             placeholder="Enter your login"
-            onChange={(e) => setUser({ ...user, login: e.target.value })}
+            onChange={(e) =>
+              setUserAuthData({ ...userAuthData, login: e.target.value })
+            }
             required
           />
           <UilUser className="uil uil-user" />
@@ -56,7 +52,9 @@ const Login = () => {
             className="password"
             id="loginPassword"
             placeholder="Enter your password"
-            onChange={(e) => setUser({ ...user, pass: e.target.value })}
+            onChange={(e) =>
+              setUserAuthData({ ...userAuthData, pass: e.target.value })
+            }
             required
           />
           <UilLock className="uil uil-lock icon" />

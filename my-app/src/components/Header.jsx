@@ -3,22 +3,21 @@ import React, { useEffect } from "react";
 
 import { UilSignout } from "@iconscout/react-unicons";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../api/auth";
-import { changeAuth } from "../store/authSlice";
+import { removeUser } from "../store/authSlice";
+import { useAuth } from "../hooks/useAuth";
 
 const Header = () => {
-  const isAuth = useSelector((state) => state.auth.authorizationStatus);
-  const userData = useSelector((state) => state.auth.userData);
+  const { isAuth, userData } = useAuth();
   const dispatch = useDispatch();
 
   async function onLogout() {
     await logout()
       .then()
       .catch((e) => console.log(e));
-    dispatch(changeAuth(false));
-    localStorage.setItem("isAuth", "false");
+    dispatch(removeUser());
     localStorage.removeItem("token");
 
     window.location.reload();
@@ -42,7 +41,7 @@ const Header = () => {
           </div>
         </Link>
         <div className="headerRight">
-          {!isAuth || !userData ? (
+          {!isAuth ? (
             <>
               <Link to={{ pathname: "/auth", search: "?state=login" }}>
                 <button className="signIn">Sign In</button>

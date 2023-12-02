@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { MaxPagePostCount } from "../config";
 
-const PageList = (props) => {
+const PageList = ({ postsLength, totalPages }) => {
+  const pagesOffset = 2;
+
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedPage, setSelectedPage] = useState(1);
-
-  const totalPages = props.totalPages;
-  const pagesOffset = 2;
 
   const updatePageList = (pageNumber) => {
     searchParams.set("page", pageNumber);
@@ -21,6 +21,10 @@ const PageList = (props) => {
       behavior: "smooth",
     });
   }, [selectedPage]);
+
+  if (postsLength < MaxPagePostCount || totalPages <= 1) {
+    return null;
+  }
 
   const renderPages = () => {
     const pages = [];
