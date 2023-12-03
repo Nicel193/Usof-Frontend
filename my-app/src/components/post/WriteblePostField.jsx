@@ -5,18 +5,19 @@ import { getCategories } from "../../api/category";
 import Select, { components } from "react-select";
 import Category from "../Category";
 
-const WriteblePostField = (props) => {
+const WriteblePostField = ({ editPost, setShouldUpdatePosts }) => {
   const [post, setPost] = useState({ title: "", content: "", categories: [] });
   const [categories, setCategories] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
 
-
-  const { setShouldUpdatePosts } = props;
+  if (editPost) {
+    post.title = editPost.title;
+    post.content = editPost.content;
+  }
 
   const shareNewPost = async () => {
     try {
-      post.categories = selectedOption.map(
-        (option) => option.value.id);
+      post.categories = selectedOption.map((option) => option.value.title);
 
       const response = await createPost(post);
       console.log(response);
@@ -67,7 +68,10 @@ const WriteblePostField = (props) => {
         <Select
           className="select"
           value={selectedOption}
-          options={categories.map((category) => ({ value: category, label: category.title }))}
+          options={categories.map((category) => ({
+            value: category,
+            label: category.title,
+          }))}
           onChange={handleChange}
           closeMenuOnSelect={false}
           isMulti

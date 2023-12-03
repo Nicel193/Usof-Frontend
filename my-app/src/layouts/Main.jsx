@@ -14,8 +14,6 @@ import { getCategories } from "../api/category";
 import Category from "../components/Category";
 import PageList from "../components/PageList";
 
-const MaxPagePostCount = 10;
-
 const Main = () => {
   const [isShowCategoty, setShowCategoty] = useState(true);
   const [totalPages, setTotalPages] = useState(1);

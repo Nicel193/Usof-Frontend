@@ -19,6 +19,7 @@ const Profile = () => {
   const [shouldUpdatePosts, setShouldUpdatePosts] = useState(true);
   const [totalPages, setTotalPages] = useState(1);
   const [posts, setPosts] = useState([]);
+  const [editablePost, setEditPost] = useState(undefined);
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
@@ -52,12 +53,19 @@ const Profile = () => {
       .catch((e) => console.log(e));
   }
 
+  function editPost(post) {
+    setEditPost(post);
+  }
+
   return (
     <div>
       <Header />
       <section>
         <div className="postContent">
-          <WriteblePostField setShouldUpdatePosts={setShouldUpdatePosts} />
+          <WriteblePostField
+            editPost={editablePost}
+            setShouldUpdatePosts={setShouldUpdatePosts}
+          />
           <span className="yourPostsText">Your Posts</span>
           <div class="underline"></div>
           {posts.length > 0 ? (
@@ -72,7 +80,7 @@ const Profile = () => {
                   publishDate={post.publishDate}
                 />
                 <button onClick={() => deletePost(post.id)}>Delete</button>
-                <button onClick={() => {}}>Edit</button>
+                <button onClick={() => editPost(post)}>Edit</button>
               </div>
             ))
           ) : (
