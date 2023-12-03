@@ -64,6 +64,7 @@ const Profile = () => {
         <div className="postContent">
           <WriteblePostField
             editPost={editablePost}
+            setEditPost={setEditPost}
             setShouldUpdatePosts={setShouldUpdatePosts}
           />
           <span className="yourPostsText">Your Posts</span>

@@ -1,32 +1,61 @@
 import React, { useEffect, useState } from "react";
-import { createPost } from "../../api/createPost";
+import { changePost, createPost } from "../../api/createPost";
 import { UilMultiply } from "@iconscout/react-unicons";
 import { getCategories } from "../../api/category";
 import Select, { components } from "react-select";
 import Category from "../Category";
 
-const WriteblePostField = ({ editPost, setShouldUpdatePosts }) => {
+const WriteblePostField = ({ editPost, setEditPost, setShouldUpdatePosts }) => {
   const [post, setPost] = useState({ title: "", content: "", categories: [] });
   const [categories, setCategories] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
 
-  if (editPost) {
-    post.title = editPost.title;
-    post.content = editPost.content;
-  }
-
   const shareNewPost = async () => {
     try {
-      post.categories = selectedOption.map((option) => option.value.title);
+      post.categories = selectedOption.map((option) => option.value);
 
       const response = await createPost(post);
       console.log(response);
+      setPost({ title: "", content: "", categories: [] });
       setShouldUpdatePosts(true);
-      setPost({ title: "", content: "", categories: [0] });
+      setSelectedOption(null);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const shareEditPost = async () => {
+    try {
+      post.categories = selectedOption.map((option) => option.value);
+
+      const response = await changePost(editPost.id, post);
+      console.log(response);
+      setPost({ title: "", content: "", categories: [] });
+      setShouldUpdatePosts(true);
+      setSelectedOption(null);
+      setEditPost(null);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (editPost) {
+      const editCategories = editPost.categories.split(", ");
+
+      setPost({
+        title: editPost.title || "",
+        content: editPost.content || "",
+        categories: editCategories,
+      });
+      setSelectedOption(
+        editCategories.map((category) => ({
+          value: category,
+          label: category,
+        }))
+      );
+    }
+  }, [editPost]);
 
   useEffect(() => {
     async function fetchPostsData() {
@@ -37,14 +66,6 @@ const WriteblePostField = ({ editPost, setShouldUpdatePosts }) => {
       .then()
       .catch((e) => console.log(e));
   }, []);
-
-  // function selectCategory(category) {
-  //   setSelectedCategories((prevSet) => {
-  //     const newSet = new Set(prevSet);
-  //     newSet.add(category);
-  //     return newSet;
-  //   });
-  // }
 
   const handleChange = (selectedOption) => {
     setSelectedOption(selectedOption);
@@ -69,7 +90,7 @@ const WriteblePostField = ({ editPost, setShouldUpdatePosts }) => {
           className="select"
           value={selectedOption}
           options={categories.map((category) => ({
-            value: category,
+            value: category.title,
             label: category.title,
           }))}
           onChange={handleChange}
@@ -77,9 +98,15 @@ const WriteblePostField = ({ editPost, setShouldUpdatePosts }) => {
           isMulti
         />
       </div>
-      <button className="postButton" onClick={shareNewPost}>
-        Post
-      </button>
+      {!editPost ? (
+        <button className="postButton" onClick={shareNewPost}>
+          Post
+        </button>
+      ) : (
+        <button className="postButton" onClick={shareEditPost}>
+          Edit
+        </button>
+      )}
     </div>
   );
 };
