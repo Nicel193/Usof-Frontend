@@ -8,6 +8,7 @@ import checkAuth from "./services/authService";
 import Main from "./layouts/Main";
 import Auth from "./layouts/Auth";
 import Profile from "./layouts/Profile";
+import Comment from "./layouts/Comment";
 import { useAuth } from "./hooks/useAuth";
 
 const App = () => {
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/" element={<Main />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/comment/:postId" element={<Comment />} />
       </Routes>
     </BrowserRouter>
   );

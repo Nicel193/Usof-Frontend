@@ -1,0 +1,83 @@
+.commentsContent {
+  width: 65%;
+  margin-left: 15px;
+
+  display: flex;
+  flex-direction: column;
+
+  .writebleCommentField {
+    margin-top: 15px;
+    background-color: #fafdfd;
+    border-radius: 25px;
+    padding: 20px;
+
+    textarea {
+      margin-top: 15px;
+    }
+  }
+
+  .comment{
+    background-color: #f8fbff;
+    border-radius: 25px;
+    padding: 10px;
+    margin-top: 10px;
+
+    .flex-center {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+  
+      span {
+        margin-left: 5px;
+        color: #505f98;
+      }
+  
+      .publishDate {
+        color: rgba(80, 95, 152, 0.5);
+      }
+    }
+  
+    h4 {
+      margin-top: 5px;
+      margin-bottom: 5px;
+      color: #091133;
+      font-size: 17px;
+      font-weight: bold;
+    }
+  
+    span {
+      color: #505f98;
+      font-size: 15px;
+    }
+
+    .action-container {
+      background-color: #e7ecff;
+      margin-top: 13px;
+      font-size: 20px;
+      border-radius: 25px;
+      padding-top: 3px;
+      padding-bottom: 3px;
+      padding-left: 10px;
+      padding-right: 10px;
+      display: inline-flex;
+      align-self: flex-start;
+  
+      span {
+        font-size: 19px;
+      }
+  
+      .icon {
+        color: #505f98;
+        transition: color 0.3s ease;
+      }
+  
+      .icon:hover {
+        color: #091133;
+      }
+  
+      .selected-icon {
+        color: #091133;
+      }
+    }
+  }
+}

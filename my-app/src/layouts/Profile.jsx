@@ -67,7 +67,7 @@ const Profile = () => {
             setEditPost={setEditPost}
             setShouldUpdatePosts={setShouldUpdatePosts}
           />
-          <span className="yourPostsText">Your Posts</span>
+          <span className="centerText">Your Posts</span>
           <div class="underline"></div>
           {posts.length > 0 ? (
             posts.map((post) => (

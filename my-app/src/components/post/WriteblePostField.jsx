@@ -10,15 +10,18 @@ const WriteblePostField = ({ editPost, setEditPost, setShouldUpdatePosts }) => {
   const [categories, setCategories] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
 
+  function clearWriteField() {
+    setPost({ title: "", content: "", categories: [] });
+    setShouldUpdatePosts(true);
+    setSelectedOption(null);
+  }
+
   const shareNewPost = async () => {
     try {
       post.categories = selectedOption.map((option) => option.value);
 
-      const response = await createPost(post);
-      console.log(response);
-      setPost({ title: "", content: "", categories: [] });
-      setShouldUpdatePosts(true);
-      setSelectedOption(null);
+      await createPost(post);
+      clearWriteField();
     } catch (error) {
       console.log(error);
     }
@@ -28,11 +31,8 @@ const WriteblePostField = ({ editPost, setEditPost, setShouldUpdatePosts }) => {
     try {
       post.categories = selectedOption.map((option) => option.value);
 
-      const response = await changePost(editPost.id, post);
-      console.log(response);
-      setPost({ title: "", content: "", categories: [] });
-      setShouldUpdatePosts(true);
-      setSelectedOption(null);
+      await changePost(editPost.id, post);
+      clearWriteField();
       setEditPost(null);
     } catch (error) {
       console.log(error);
@@ -67,13 +67,18 @@ const WriteblePostField = ({ editPost, setEditPost, setShouldUpdatePosts }) => {
       .catch((e) => console.log(e));
   }, []);
 
+  function exitFromEditMode() {
+    clearWriteField();
+    setEditPost(null);
+  }
+
   const handleChange = (selectedOption) => {
     setSelectedOption(selectedOption);
   };
 
   return (
-    <div className="newPost">
-      <div>
+    <div>
+      <div className="newPost">
         <input
           value={post ? post.title : ""}
           onChange={(e) => setPost({ ...post, title: e.target.value })}
@@ -103,9 +108,14 @@ const WriteblePostField = ({ editPost, setEditPost, setShouldUpdatePosts }) => {
           Post
         </button>
       ) : (
-        <button className="postButton" onClick={shareEditPost}>
-          Edit
-        </button>
+        <div>
+          <button className="postButton" onClick={shareEditPost}>
+            Edit
+          </button>
+          <button className="postButton" onClick={exitFromEditMode}>
+            Exit
+          </button>
+        </div>
       )}
     </div>
   );

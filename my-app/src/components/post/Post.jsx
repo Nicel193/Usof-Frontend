@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 
 import { UilThumbsUp,  UilThumbsDown, UilCommentLines } from "@iconscout/react-unicons";
 import { deletePostLike, getPostLikes, setPostLike } from "../../api/like";
+import { Link } from "react-router-dom";
 
 const Post = (props) => {
   const { postId } = props;
@@ -105,10 +106,10 @@ const Post = (props) => {
         </button>
         <span>{postGrade}</span>
       </div>
-      <div className="flex-center action-container comment">
+      <Link to={`/comment/:${postId}`} className="text-link flex-center action-container comment">
         <UilCommentLines className="icon" />
         <span>2</span>
-      </div>
+      </Link>
     </div>
   );
 };
