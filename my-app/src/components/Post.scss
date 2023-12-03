@@ -50,15 +50,19 @@
 
     .icon {
       color: #505f98;
-      transition: color 0.3s ease;
+      transition: transform 0.3s ease;
+    }
+
+    button{
+      display: flex;
     }
 
     .icon:hover {
-      color: #091133;
+      transform: translateY(-2px);
     }
 
     .selected-icon {
-      color: #091133;
+      color: #0c153b;
     }
   }
 
