@@ -8,14 +8,13 @@ import { getPostById } from "../api/getPosts";
 import ProfileInfo from "../components/ProfileInfo";
 import WritebleCommentField from "../components/comment/WritebleCommentField";
 import Comment from "../components/comment/Comment";
-import { getCommentsByPost } from "../api/comment";
+import { useComments } from "../hooks/useComments";
 
 const Comments = () => {
   const { postId } = useParams();
+  const { comments, setShouldUpdateComment } = useComments(postId);
 
-  const [shouldUpdateComment, setShouldUpdateComment] = useState(true);
   const [post, setPost] = useState(undefined);
-  const [comments, setComments] = useState([]);
 
   useEffect(() => {
     async function fetchPostData() {
@@ -30,21 +29,6 @@ const Comments = () => {
 
     //eslint-disable-next-line
   }, []);
-
-  useEffect(() => {
-    async function fetchCommentsData() {
-      const response = await getCommentsByPost(postId);
-
-      setComments(response.data);
-      setShouldUpdateComment(false);
-    }
-
-    fetchCommentsData()
-      .then()
-      .catch((e) => console.log(e));
-
-    //eslint-disable-next-line
-  }, [postId, shouldUpdateComment]);
 
   return (
     <div>

@@ -47,12 +47,6 @@ const Profile = () => {
     //eslint-disable-next-line
   }, [userData, searchParams, shouldUpdatePosts]);
 
-  async function deletePost(postId) {
-    await deletePostById(postId)
-      .then(() => setShouldUpdatePosts(true))
-      .catch((e) => console.log(e));
-  }
-
   function editPost(post) {
     setEditPost(post);
   }
@@ -80,7 +74,6 @@ const Profile = () => {
                   categories={post.categories}
                   publishDate={post.publishDate}
                 />
-                <button onClick={() => deletePost(post.id)}>Delete</button>
                 <button onClick={() => editPost(post)}>Edit</button>
               </div>
             ))

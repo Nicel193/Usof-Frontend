@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 export function useAuth() {
   const userData = useSelector((state) => state.auth.userData);
@@ -6,5 +6,6 @@ export function useAuth() {
   return {
     isAuth: !!userData,
     userData: userData,
+    userLogin: userData ? userData.login : null,
   };
 }
