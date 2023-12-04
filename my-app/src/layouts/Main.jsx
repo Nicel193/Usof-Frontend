@@ -1,59 +1,28 @@
 import "./styles/Main.scss";
 
-import React from "react";
-import Header from "../components/Header";
-import Post from "../components/post/Post";
 import { UilHome, UilUser } from "@iconscout/react-unicons";
 import { UilAngleDown, UilAngleUp } from "@iconscout/react-unicons";
 
-import { getPosts } from "../api/getPosts";
-import { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
-import { getCategories } from "../api/category";
+import React from "react";
+import Header from "../components/Header";
+import Post from "../components/post/Post";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import Category from "../components/Category";
 import PageList from "../components/PageList";
-import Modal from "../components/Modal";
+import { usePosts } from "../hooks/usePosts";
+import { useCategories } from "../hooks/useCategories";
 
 const Main = () => {
   const [isShowCategoty, setShowCategoty] = useState(true);
-  const [totalPages, setTotalPages] = useState(1);
-  const [posts, setPosts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [searchParams] = useSearchParams();
 
-  useEffect(() => {
-    async function fetchCategoriesData() {
-      const response = await getCategories();
-      console.log(response);
-      setCategories(response.data);
-    }
-
-    fetchCategoriesData()
-      .then()
-      .catch((e) => console.log(e));
-  }, []);
-
-  useEffect(() => {
-    async function fetchPostsData() {
-      const response = await getPosts(searchParams.toString());
-
-      setPosts(response.data.posts);
-      setTotalPages(response.data.totalPages);
-    }
-    fetchPostsData()
-      .then()
-      .catch((e) => console.log(e));
-    //eslint-disable-next-line
-  }, [searchParams]);
+  const {categories} = useCategories();
+  const {totalPages, posts} = usePosts();
 
   function drawCategoryList() {
     setShowCategoty(!isShowCategoty);
   }
-
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   return (
     <div>
@@ -102,6 +71,7 @@ const Main = () => {
                 content={post.content}
                 categories={post.categories}
                 publishDate={post.publishDate}
+                post={post}
               />
             ))
           ) : (

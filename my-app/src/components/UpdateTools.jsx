@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import "./styles/ActionContainer.scss";
 
 import { UilEdit } from "@iconscout/react-unicons";
@@ -6,7 +6,12 @@ import { UilTrashAlt } from "@iconscout/react-unicons";
 import { useAuth } from "../hooks/useAuth";
 import { deletePostById } from "../api/createPost";
 
-const UpdateTools = ({ authorLogin, postId, setDeleted }) => {
+import Modal from "./Modal";
+import WriteblePostField from "./post/WriteblePostField";
+
+const UpdateTools = ({ authorLogin, post, setDeleted }) => {
+  const [editablePost, setEditPost] = useState(undefined);
+  const [isEdit, setEdit] = useState(false);
   const { userLogin } = useAuth();
 
   async function deletePost(postId) {
@@ -15,15 +20,25 @@ const UpdateTools = ({ authorLogin, postId, setDeleted }) => {
       .catch((e) => console.log(e));
   }
 
+  function editPost() {
+    setEdit(true);
+  }
+
   return (
     <div>
+      <Modal isOpen={isEdit}>
+        <WriteblePostField editPost={post} setEditPost={setEdit} />
+      </Modal>
+
       {userLogin === authorLogin ? (
         <div className="updateTools">
-          <UilEdit width={17} height={17} />
+          <button className="transparent-button" onClick={() => editPost()}>
+            <UilEdit width={17} height={17} />
+          </button>
 
           <button
             className="transparent-button"
-            onClick={() => deletePost(postId)}
+            onClick={() => deletePost(post.id)}
           >
             <UilTrashAlt width={17} height={17} />
           </button>

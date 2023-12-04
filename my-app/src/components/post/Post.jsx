@@ -19,6 +19,7 @@ const Post = ({
   categories,
   content,
   title,
+  post
 }) => {
   const [isDeleted, setDeleted] = useState(false);
 
@@ -60,7 +61,7 @@ const Post = ({
 
             <UpdateTools
               authorLogin={authorLogin}
-              postId={postId}
+              post={post}
               isDeleted={isDeleted}
               setDeleted={setDeleted}
             />

@@ -44,6 +44,7 @@ const Comments = () => {
                 content={post.content}
                 categories={post.categories}
                 publishDate={post.publishDate}
+                post={post}
               />
               <WritebleCommentField
                 idPost={post.id}

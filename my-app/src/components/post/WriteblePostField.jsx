@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { changePost, createPost } from "../../api/createPost";
-import { UilMultiply } from "@iconscout/react-unicons";
 import { getCategories } from "../../api/category";
-import Select, { components } from "react-select";
-import Category from "../Category";
+import Select from "react-select";
 
 const WriteblePostField = ({ editPost, setEditPost, setShouldUpdatePosts }) => {
   const [post, setPost] = useState({ title: "", content: "", categories: [] });
@@ -33,7 +31,7 @@ const WriteblePostField = ({ editPost, setEditPost, setShouldUpdatePosts }) => {
 
       await changePost(editPost.id, post);
       clearWriteField();
-      setEditPost(null);
+      setEditPost(false);
     } catch (error) {
       console.log(error);
     }
@@ -69,7 +67,7 @@ const WriteblePostField = ({ editPost, setEditPost, setShouldUpdatePosts }) => {
 
   function exitFromEditMode() {
     clearWriteField();
-    setEditPost(null);
+    setEditPost(false);
   }
 
   const handleChange = (selectedOption) => {

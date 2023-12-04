@@ -11,7 +11,6 @@ import { useSearchParams } from "react-router-dom";
 import { getPostsByUserId } from "../api/getPosts";
 import WriteblePostField from "../components/post/WriteblePostField";
 import PageList from "../components/PageList";
-import { deletePostById } from "../api/createPost";
 
 const Profile = () => {
   const userData = useSelector((state) => state.auth.userData);
@@ -73,6 +72,7 @@ const Profile = () => {
                   content={post.content}
                   categories={post.categories}
                   publishDate={post.publishDate}
+                  post={post}
                 />
                 <button onClick={() => editPost(post)}>Edit</button>
               </div>
