@@ -9,6 +9,7 @@ import {
 } from "@iconscout/react-unicons";
 import { deletePostLike, getPostLikes, setPostLike } from "../../api/like";
 import { Link } from "react-router-dom";
+import { formatDate } from "../../services/dateFormater";
 
 const Post = (props) => {
   const { postId } = props;
@@ -57,14 +58,6 @@ const Post = (props) => {
       .catch((e) => console.log(e));
   }
 
-  function formatDate(date) {
-    const day = date.getDate().toString().padStart(2, "0");
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const year = date.getFullYear();
-
-    return `${day}.${month}.${year}`;
-  }
-
   function getLikeClassName(iconLikeType) {
     let className = "icon";
     if (likeType === iconLikeType) className += " selected-icon";
@@ -91,7 +84,7 @@ const Post = (props) => {
         <span>{`@${props.authorLogin}`}</span>
         <span> • </span>
         <span className="publishDate">
-          {formatDate(new Date(props.publishDate))}
+          {formatDate(props.publishDate)}
         </span>
       </div>
       <h4>{`"${props.title}"`}</h4>
@@ -110,7 +103,7 @@ const Post = (props) => {
         <span>{postGrade}</span>
       </div>
       <Link
-        to={`/comment/${postId}`}
+        to={`/comments/${postId}`}
         className="text-link flex-center action-container comment"
       >
         <UilCommentLines className="icon" />

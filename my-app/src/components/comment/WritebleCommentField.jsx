@@ -1,11 +1,26 @@
 import React, { useEffect, useState } from "react";
+import { createComment } from "../../api/comment";
 
-const WriteblePostField = ({ editComment }) => {
-    const [comment, setComment] = useState({ content: "" });
+const WritebleCommentField = ({ idPost, setShouldUpdateComment, editComment }) => {
+  const [comment, setComment] = useState({ content: "" });
+
+  function clearWriteField(params) {
+    setComment({ content: "" });
+  }
+
+  const shareNewComment = async () => {
+    try {
+      await createComment(idPost, comment);
+      setShouldUpdateComment(true);
+      clearWriteField();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
-      <div className="newComment">
+      <div className="writebleCommentField">
         <textarea
           value={comment ? comment.content : ""}
           onChange={(e) => setComment({ ...comment, content: e.target.value })}
@@ -15,7 +30,7 @@ const WriteblePostField = ({ editComment }) => {
         ></textarea>
       </div>
       {!editComment ? (
-        <button className="postButton" onClick={() => {}}>
+        <button className="postButton" onClick={shareNewComment}>
           Comment
         </button>
       ) : (
@@ -32,4 +47,4 @@ const WriteblePostField = ({ editComment }) => {
   );
 };
 
-export default WriteblePostField;
+export default WritebleCommentField;
