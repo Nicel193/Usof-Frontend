@@ -8,6 +8,7 @@ import { deletePostById } from "../api/createPost";
 
 import Modal from "./Modal";
 import WriteblePostField from "./post/WriteblePostField";
+import { usePosts } from "../hooks/usePosts";
 
 const UpdateTools = ({ authorLogin, post, setDeleted }) => {
   const [editablePost, setEditPost] = useState(undefined);

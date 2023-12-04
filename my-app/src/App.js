@@ -13,8 +13,8 @@ import Comments from "./layouts/Comments";
 import { useAuth } from "./hooks/useAuth";
 
 const App = () => {
-  const { isAuth } = useAuth();
   const dispatch = useDispatch();
+  const { isAuth } = useAuth();
 
   useEffect(() => {
     const storedUserData = localStorage.getItem("isAuth");

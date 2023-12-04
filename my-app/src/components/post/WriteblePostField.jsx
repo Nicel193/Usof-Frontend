@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { changePost, createPost } from "../../api/createPost";
 import { getCategories } from "../../api/category";
+import { updatePosts } from "../../store/postSlise";
+
 import Select from "react-select";
 
-const WriteblePostField = ({ editPost, setEditPost, setShouldUpdatePosts }) => {
+const WriteblePostField = ({ editPost, setEditPost }) => {
+  const dispatch = useDispatch();
+
   const [post, setPost] = useState({ title: "", content: "", categories: [] });
   const [categories, setCategories] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
 
   function clearWriteField() {
     setPost({ title: "", content: "", categories: [] });
-    setShouldUpdatePosts(true);
+    dispatch(updatePosts())
     setSelectedOption(null);
   }
 

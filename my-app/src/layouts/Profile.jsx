@@ -6,14 +6,14 @@ import Post from "../components/post/Post";
 
 import ProfileInfo from "../components/ProfileInfo";
 
-import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { getPostsByUserId } from "../api/getPosts";
 import WriteblePostField from "../components/post/WriteblePostField";
 import PageList from "../components/PageList";
+import { useAuth } from "../hooks/useAuth";
 
 const Profile = () => {
-  const userData = useSelector((state) => state.auth.userData);
+  const { userData } = useAuth();
 
   const [shouldUpdatePosts, setShouldUpdatePosts] = useState(true);
   const [totalPages, setTotalPages] = useState(1);

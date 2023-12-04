@@ -7,11 +7,14 @@ const postSlice = createSlice({
   },
   reducers: {
     updatePosts(state) {
-        state.shouldUpdatePosts = true;
+      state.shouldUpdatePosts = true;
+    },
+    postUpdated(state) {
+      state.shouldUpdatePosts = false;
     },
   },
 });
 
-export const { updatePosts } = postSlice.actions;
+export const { updatePosts, postUpdated } = postSlice.actions;
 
 export default postSlice.reducer;

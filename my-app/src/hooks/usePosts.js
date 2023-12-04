@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { getPosts } from "../api/getPosts";
+import { useDispatch, useSelector } from "react-redux";
+import { postUpdated, updatePosts } from "../store/postSlise";
 
 export function usePosts(postId) {
+  const dispatch = useDispatch();
+  const shouldUpdatePosts = useSelector(
+    (state) => state.posts.shouldUpdatePosts
+  );
+
   const [searchParams] = useSearchParams();
   const [totalPages, setTotalPages] = useState(1);
   const [posts, setPosts] = useState([]);
@@ -14,11 +21,12 @@ export function usePosts(postId) {
       setPosts(response.data.posts);
       setTotalPages(response.data.totalPages);
     }
+
     fetchPostsData()
-      .then()
+      .then(() => {dispatch(postUpdated())})
       .catch((e) => console.log(e));
     //eslint-disable-next-line
-  }, [searchParams]);
+  }, [searchParams, shouldUpdatePosts]);
 
   return {
     totalPages,
