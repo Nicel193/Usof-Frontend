@@ -1,11 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
-import { UilThumbsUp, UilThumbsDown } from "@iconscout/react-unicons";
 import { formatDate } from "../../services/dateFormater";
 import LikeField from "../Like";
+import { useLikes } from "../../hooks/useLikes";
+import {
+  deleteCommentLike,
+  getCommentLikes,
+  setCommentLike,
+} from "../../api/like";
 
 const Post = ({ commentId, authorLogin, publishDate, content }) => {
+  const { selectedLikeType, grade, setLike } = useLikes(
+    getCommentLikes,
+    deleteCommentLike,
+    setCommentLike,
+    commentId
+  );
+
   return (
     <div className="comment">
       <div class="flex-center">
@@ -22,7 +33,7 @@ const Post = ({ commentId, authorLogin, publishDate, content }) => {
       <span className="content">{content}</span>
 
       <div></div>
-      <LikeField grade={0}/>
+      <LikeField setLike={setLike} selectedLikeType={selectedLikeType} grade={grade} />
     </div>
   );
 };

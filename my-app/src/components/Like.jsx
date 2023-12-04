@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/ActionContainer.scss"
+import "./styles/ActionContainer.scss";
 
 import { UilThumbsUp, UilThumbsDown } from "@iconscout/react-unicons";
 
