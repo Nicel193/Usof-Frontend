@@ -1,15 +1,12 @@
-import "../Post.scss";
+import "../styles/Post.scss";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import {
-  UilThumbsUp,
-  UilThumbsDown,
-  UilCommentLines,
-} from "@iconscout/react-unicons";
+import { UilCommentLines } from "@iconscout/react-unicons";
 import { deletePostLike, getPostLikes, setPostLike } from "../../api/like";
 import { Link } from "react-router-dom";
 import { formatDate } from "../../services/dateFormater";
+import LikeField from "../Like";
 
 const Post = (props) => {
   const { postId } = props;
@@ -58,13 +55,6 @@ const Post = (props) => {
       .catch((e) => console.log(e));
   }
 
-  function getLikeClassName(iconLikeType) {
-    let className = "icon";
-    if (likeType === iconLikeType) className += " selected-icon";
-
-    return className;
-  }
-
   function getParsCategories(categories) {
     const wordsArray = categories.split(", ");
     const wordsWithHash = wordsArray.map((word) => `#${word}`);
@@ -83,32 +73,25 @@ const Post = (props) => {
         />
         <span>{`@${props.authorLogin}`}</span>
         <span> • </span>
-        <span className="publishDate">
-          {formatDate(props.publishDate)}
-        </span>
+        <span className="publishDate">{formatDate(props.publishDate)}</span>
       </div>
       <h4>{`"${props.title}"`}</h4>
       <span>{`${props.content} ${getParsCategories(props.categories)}`}</span>
       <div></div>
-      <div className="flex-center action-container">
-        <button className="transparent-button" onClick={() => setLike("like")}>
-          <UilThumbsUp className={getLikeClassName("like")} />
-        </button>
-        <button
-          className="transparent-button"
-          onClick={() => setLike("dislike")}
+      <div className="d-flex">
+        <LikeField
+          selectedLikeType={likeType}
+          setLike={setLike}
+          grade={postGrade}
+        />
+        <Link
+          to={`/comments/${postId}`}
+          className="text-link flex-center action-container commentIcon"
         >
-          <UilThumbsDown className={getLikeClassName("dislike")} />
-        </button>
-        <span>{postGrade}</span>
+          <UilCommentLines className="icon" />
+          <span>2</span>
+        </Link>
       </div>
-      <Link
-        to={`/comments/${postId}`}
-        className="text-link flex-center action-container comment"
-      >
-        <UilCommentLines className="icon" />
-        <span>2</span>
-      </Link>
     </div>
   );
 };

@@ -1,4 +1,3 @@
-import "./Post.scss";
 import React from "react";
 
 import { UilAt } from "@iconscout/react-unicons";

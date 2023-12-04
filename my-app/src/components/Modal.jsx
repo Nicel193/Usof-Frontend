@@ -1,5 +1,5 @@
 import React from "react";
-import "./Modal.scss";
+import "./styles/Modal.scss";
 
 const Modal = ({ isOpen, setIsOpen }) => {
   return isOpen ? (

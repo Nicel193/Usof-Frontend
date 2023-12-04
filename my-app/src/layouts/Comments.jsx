@@ -8,7 +8,6 @@ import { getPostById } from "../api/getPosts";
 import ProfileInfo from "../components/ProfileInfo";
 import WritebleCommentField from "../components/comment/WritebleCommentField";
 import Comment from "../components/comment/Comment";
-import { UilThumbsUp, UilThumbsDown } from "@iconscout/react-unicons";
 import { getCommentsByPost } from "../api/comment";
 
 const Comments = () => {
@@ -62,8 +61,10 @@ const Comments = () => {
                 categories={post.categories}
                 publishDate={post.publishDate}
               />
-              <WritebleCommentField idPost={post.id}
-              setShouldUpdateComment={setShouldUpdateComment} />
+              <WritebleCommentField
+                idPost={post.id}
+                setShouldUpdateComment={setShouldUpdateComment}
+              />
             </>
           )}
           <span className="centerText">Comments</span>

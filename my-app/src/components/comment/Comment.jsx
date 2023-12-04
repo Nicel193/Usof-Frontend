@@ -1,9 +1,9 @@
-import "../Post.scss";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { UilThumbsUp, UilThumbsDown } from "@iconscout/react-unicons";
 import { formatDate } from "../../services/dateFormater";
+import LikeField from "../Like";
 
 const Post = ({ commentId, authorLogin, publishDate, content }) => {
   return (
@@ -22,21 +22,7 @@ const Post = ({ commentId, authorLogin, publishDate, content }) => {
       <span className="content">{content}</span>
 
       <div></div>
-      <div className="flex-center action-container">
-        <button
-          className="transparent-button"
-          // onClick={() => setLike("like")}
-        >
-          <UilThumbsUp className="icon" />
-        </button>
-        <button
-          className="transparent-button"
-          // onClick={() => setLike("dislike")}
-        >
-          <UilThumbsDown className="icon" />
-        </button>
-        <span>5</span>
-      </div>
+      <LikeField grade={0}/>
     </div>
   );
 };

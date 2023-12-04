@@ -1,4 +1,4 @@
-import "./Header.scss";
+import "./styles/Header.scss";
 import React, { useEffect } from "react";
 
 import { UilSignout } from "@iconscout/react-unicons";

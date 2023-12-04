@@ -1,0 +1,33 @@
+.action-container {
+  background-color: #e7ecff;
+  margin-top: 13px;
+  font-size: 20px;
+  border-radius: 25px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  display: inline-flex;
+  align-self: flex-start;
+
+  span {
+    font-size: 19px;
+  }
+
+  .icon {
+    color: #505f98;
+    transition: transform 0.3s ease;
+  }
+
+  button {
+    display: flex;
+  }
+
+  .icon:hover {
+    transform: translateY(-2px);
+  }
+
+  .selected-icon {
+    color: #0c153b;
+  }
+}

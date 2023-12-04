@@ -1,4 +1,3 @@
-import "./Header.scss";
 import React from "react";
 import { UilChannel } from "@iconscout/react-unicons";
 import { useSearchParams } from "react-router-dom";
