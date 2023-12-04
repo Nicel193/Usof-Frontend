@@ -13,6 +13,7 @@ import { getCategories } from "../api/category";
 
 import Category from "../components/Category";
 import PageList from "../components/PageList";
+import Modal from "../components/Modal";
 
 const Main = () => {
   const [isShowCategoty, setShowCategoty] = useState(true);
@@ -54,11 +55,8 @@ const Main = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-
   return (
     <div>
-
-
       <Header />
       <aside className="slider">
         <div className="flex-center home chose">
