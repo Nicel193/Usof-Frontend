@@ -27,6 +27,10 @@ body {
     background-image: linear-gradient(to bottom right, #e7ecff, transparent);
   }
 
+  .active-chose {
+    background-image: linear-gradient(to bottom right, #e7ecff, transparent);
+  }
+
   .home {
     margin: 5px;
   }
@@ -74,7 +78,7 @@ section {
       border-radius: 2px;
     }
 
-    .page:hover{
+    .page:hover {
       background-color: #e7ecff;
       border: double #f8fbff;
     }

@@ -7,7 +7,7 @@ import React from "react";
 import Header from "../components/Header";
 import Post from "../components/post/Post";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import Category from "../components/Category";
 import PageList from "../components/PageList";
@@ -15,25 +15,40 @@ import { usePosts } from "../hooks/usePosts";
 import { useCategories } from "../hooks/useCategories";
 
 const Main = () => {
+  const [selectedButtonId, setButtonId] = useState(0);
   const [isShowCategoty, setShowCategoty] = useState(true);
 
-  const {categories} = useCategories();
-  const {totalPages, posts} = usePosts();
+  const { categories } = useCategories();
+  const { totalPages, posts } = usePosts();
 
   function drawCategoryList() {
     setShowCategoty(!isShowCategoty);
+  }
+
+  function isActiveButton(id) {
+    return selectedButtonId === id ? "active-chose" : "chose";
   }
 
   return (
     <div>
       <Header />
       <aside className="slider">
-        <div className="flex-center home chose">
-          <UilHome size="32" color="#505f98" />
-          <span>Home</span>
+        <div>
+          <NavLink
+            to="/"
+            onClick={() => setButtonId(0)}
+            className={`text-link flex-center home ${isActiveButton(0)}`}
+          >
+            <UilHome size="32" color="#505f98" />
+            <span>Home</span>
+          </NavLink>
         </div>
         <div>
-          <Link to="/profile" className="text-link flex-center home chose">
+          <Link
+            to="/profile"
+            onClick={() => setButtonId(1)}
+            className={`text-link flex-center home ${isActiveButton(1)}`}
+          >
             <UilUser size="32" color="#505f98" />
             <span>Profile</span>
           </Link>
@@ -50,8 +65,14 @@ const Main = () => {
           </div>
           {isShowCategoty &&
             (categories.length > 0 ? (
-              categories.map((category) => (
-                <Category id={category.id} title={category.title} />
+              categories.map((category, index) => (
+                <Category
+                  id={category.id}
+                  title={category.title}
+                  isActiveButton={isActiveButton}
+                  setButtonId={setButtonId}
+                  buttonId={index + 2}
+                />
               ))
             ) : (
               <div style={{ fontSize: "32px" }}>Category not found</div>
@@ -75,7 +96,9 @@ const Main = () => {
               />
             ))
           ) : (
-            <div className="centerText" style={{ fontSize: "32px" }}>Posts not found</div>
+            <div className="centerText" style={{ fontSize: "32px" }}>
+              Posts not found
+            </div>
           )}
           <PageList postsLength={posts.length} totalPages={totalPages} />
         </div>

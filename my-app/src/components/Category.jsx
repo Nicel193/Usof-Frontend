@@ -2,18 +2,21 @@ import React from "react";
 import { UilChannel } from "@iconscout/react-unicons";
 import { useSearchParams } from "react-router-dom";
 
-const Category = (props) => {
+const Category = ({ id, title, isActiveButton, setButtonId, buttonId }) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { id } = props;
 
   function findByCategory() {
-    setSearchParams({ category: id  }); 
+    setSearchParams({ category: id });
+    setButtonId(buttonId);
   }
 
   return (
-    <div onClick={findByCategory} className="flex-center category chose">
+    <div
+      onClick={findByCategory}
+      className={`text-link flex-center home ${isActiveButton(buttonId)}`}
+    >
       <UilChannel size="32" color="#505f98" />
-      <span>{props.title}</span>
+      <span>{title}</span>
     </div>
   );
 };
