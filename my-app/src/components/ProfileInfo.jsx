@@ -6,9 +6,13 @@ import { UilAdjustHalf } from "@iconscout/react-unicons";
 import { useAuth } from "../hooks/useAuth";
 import { useUserAvatar } from "../hooks/useUserAvatar";
 
+import UpdateUserProfile from "../components/tools/UpdateUserProfile";
+
 const ProfileInfo = () => {
   const { userData, userId } = useAuth();
   const { avatar } = useUserAvatar(userId);
+
+  console.log(avatar);
 
   if (!userData) {
     return null;
@@ -20,7 +24,10 @@ const ProfileInfo = () => {
         <img width={55} height={55} src={avatar} alt="Avatar" />
       </div>
       <div className="info">
-        <span>{userData.fullName}</span>
+        <div className="d-flex">
+          <span className="authorInfo">{userData.fullName}</span>
+          <UpdateUserProfile/>
+        </div>
         <span className="login">{`@${userData.login}`}</span>
 
         <div className="additionalInfo">

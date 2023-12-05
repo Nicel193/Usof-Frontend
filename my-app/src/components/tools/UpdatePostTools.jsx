@@ -4,7 +4,7 @@ import "../styles/ActionContainer.scss";
 import { UilEdit } from "@iconscout/react-unicons";
 import { UilTrashAlt } from "@iconscout/react-unicons";
 import { useAuth } from "../../hooks/useAuth";
-import { deletePostById } from "../../api/posts";
+import { deletePostById } from "../../api/createPost";
 
 import Modal from "../Modal";
 import WriteblePostField from "../post/WriteblePostField";

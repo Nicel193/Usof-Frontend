@@ -5,7 +5,9 @@ export const getUsertById = (userId) => {
 };
 
 export const updateAvatar = (formDate) => {
-  $api.defaults.headers.common['Content-Type'] = 'multipart/form-data';
-
-  return $api.post(`/users/uavatar`, formDate);
+  return $api.post(`/users/uavatar`, formDate, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
 };

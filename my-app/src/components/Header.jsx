@@ -8,11 +8,13 @@ import { Link } from "react-router-dom";
 import { logout } from "../api/auth";
 import { removeUser } from "../store/authSlice";
 import { useAuth } from "../hooks/useAuth";
+import { useUserAvatar } from "../hooks/useUserAvatar";
 
 const Header = () => {
-  const { isAuth, userData, userAvatar } = useAuth();
-
   const dispatch = useDispatch();
+
+  const { isAuth, userData, userId } = useAuth();
+  const { avatar } = useUserAvatar(userId);
 
   async function onLogout() {
     await logout()
@@ -58,7 +60,7 @@ const Header = () => {
                 className="avatar"
                 width={35}
                 height={35}
-                src={userAvatar}
+                src={avatar}
                 alt="ProfileIcon"
               />
               <button className="logout" onClick={onLogout}>

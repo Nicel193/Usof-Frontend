@@ -73,3 +73,12 @@ select:focus {
 .avatar {
   border-radius: 50%;
 }
+
+.updateTools svg {
+  color: #505f98;
+  transition: transform 0.3s ease;
+}
+
+.updateTools svg:hover {
+  transform: scale(1.2);
+}
