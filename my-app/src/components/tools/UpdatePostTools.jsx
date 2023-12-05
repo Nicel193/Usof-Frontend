@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import "./styles/ActionContainer.scss";
+import "../styles/ActionContainer.scss";
 
 import { UilEdit } from "@iconscout/react-unicons";
 import { UilTrashAlt } from "@iconscout/react-unicons";
-import { useAuth } from "../hooks/useAuth";
-import { deletePostById } from "../api/createPost";
+import { useAuth } from "../../hooks/useAuth";
+import { deletePostById } from "../../api/posts";
 
-import Modal from "./Modal";
-import WriteblePostField from "./post/WriteblePostField";
+import Modal from "../Modal";
+import WriteblePostField from "../post/WriteblePostField";
 
 const UpdatePostTools = ({ authorLogin, post, setDeleted }) => {
   const [isEdit, setEdit] = useState(false);

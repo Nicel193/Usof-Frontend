@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 
 import { formatDate } from "../../services/dateFormater";
-import LikeField from "../Like";
 import { useLikes } from "../../hooks/useLikes";
 import {
   deleteCommentLike,
   getCommentLikes,
   setCommentLike,
 } from "../../api/like";
-import UpdateCommentTools from "../UpdateCommentTools";
+import { useUserAvatar } from "../../hooks/useUserAvatar";
+
+import LikeField from "../Like";
+import UpdateCommentTools from "../tools/UpdateCommentTools";
 
 const Post = ({ commentId, authorLogin, publishDate, content, comment }) => {
   const [isDeleted, setDeleted] = useState(false);
+  const { avatar} = useUserAvatar(comment.idOwner);
 
   const { selectedLikeType, grade, setLike } = useLikes(
     getCommentLikes,
@@ -33,7 +36,8 @@ const Post = ({ commentId, authorLogin, publishDate, content, comment }) => {
               <img
                 width={30}
                 height={30}
-                src="https://icons-for-free.com/iconfiles/png/512/business+costume+male+man+office+user+icon-1320196264882354682.png"
+                className="avatar"
+                src={avatar}
                 alt="AutorIcon"
               />
               <span>{`@${authorLogin}`}</span>

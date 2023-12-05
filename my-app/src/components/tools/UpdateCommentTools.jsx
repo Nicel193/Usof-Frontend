@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import "./styles/ActionContainer.scss";
+import "../styles/ActionContainer.scss";
 
 import { UilEdit } from "@iconscout/react-unicons";
 import { UilTrashAlt } from "@iconscout/react-unicons";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../../hooks/useAuth";
 
-import Modal from "./Modal";
-import WritebleCommentField from "./comment/WritebleCommentField";
-import { deleteCommentById } from "../api/comment";
+import Modal from "../Modal";
+import WritebleCommentField from "../comment/WritebleCommentField";
+import { deleteCommentById } from "../../api/comment";
 
 const UpdateCommentTools = ({ authorLogin, comment, setDeleted }) => {
   const [isEdit, setEdit] = useState(false);

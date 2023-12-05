@@ -1,5 +1,5 @@
 import "./styles/Header.scss";
-import React, { useEffect } from "react";
+import React from "react";
 
 import { UilSignout } from "@iconscout/react-unicons";
 
@@ -55,6 +55,7 @@ const Header = () => {
             <>
               <span>{`@${userData.login}`}</span>
               <img
+                className="avatar"
                 width={35}
                 height={35}
                 src={userAvatar}

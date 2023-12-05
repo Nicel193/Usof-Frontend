@@ -12,11 +12,10 @@ import { useAuth } from "../hooks/useAuth";
 import ProfileInfo from "../components/ProfileInfo";
 import WriteblePostField from "../components/post/WriteblePostField";
 import PageList from "../components/PageList";
+import UpdateUserProfile from "../components/tools/UpdateUserProfile";
 
 const Profile = () => {
-  const updatePosts = useSelector(
-    (state) => state.posts.shouldUpdatePosts
-  );
+  const updatePosts = useSelector((state) => state.posts.shouldUpdatePosts);
   const { userData } = useAuth();
 
   const [shouldUpdatePosts, setShouldUpdatePosts] = useState(true);
@@ -54,9 +53,7 @@ const Profile = () => {
       <Header />
       <section>
         <div className="postContent">
-          <WriteblePostField
-            setShouldUpdatePosts={setShouldUpdatePosts}
-          />
+          <WriteblePostField setShouldUpdatePosts={setShouldUpdatePosts} />
           <span className="centerText">Your Posts</span>
           <div class="underline"></div>
           {posts.length > 0 ? (

@@ -8,11 +8,10 @@ import { Link } from "react-router-dom";
 import { formatDate } from "../../services/dateFormater";
 import { useLikes } from "../../hooks/useLikes";
 import { useComments } from "../../hooks/useComments";
+import { useUserAvatar } from "../../hooks/useUserAvatar";
 
 import LikeField from "../Like";
-import UpdateTools from "../UpdatePostTools";
-import { getUserPicture } from "../../services/profilePictureService";
-import { useUserAvatar } from "../../hooks/useUserAvatar";
+import UpdatePostTools from "../tools/UpdatePostTools";
 
 const Post = ({
   postId,
@@ -51,13 +50,13 @@ const Post = ({
         <>
           <div class="flex-center">
             <div className="authorInfo">
-              <img width={47} height={47} src={avatar} alt="AutorIcon" />
+              <img className="avatar" width={47} height={47} src={avatar} alt="AutorIcon" />
               <span>{`@${authorLogin}`}</span>
               <span> • </span>
               <span className="publishDate">{formatDate(publishDate)}</span>
             </div>
 
-            <UpdateTools
+            <UpdatePostTools
               authorLogin={authorLogin}
               post={post}
               isDeleted={isDeleted}

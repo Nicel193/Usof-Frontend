@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { changePost, createPost } from "../../api/createPost";
+import { changePost, createPost } from "../../api/posts";
 import { getCategories } from "../../api/category";
 import { updatePosts } from "../../store/postSlise";
 
