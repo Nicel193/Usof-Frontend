@@ -11,6 +11,7 @@ import { useComments } from "../../hooks/useComments";
 
 import LikeField from "../Like";
 import UpdateTools from "../UpdateTools";
+import { getUserPicture } from "../../services/profilePictureService";
 
 const Post = ({
   postId,
@@ -19,9 +20,10 @@ const Post = ({
   categories,
   content,
   title,
-  post
+  post,
 }) => {
   const [isDeleted, setDeleted] = useState(false);
+  const [authorPicture, setAuthorPicture] = useState("");
 
   const { commentsCount } = useComments(postId);
   const { selectedLikeType, grade, setLike } = useLikes(
@@ -33,7 +35,13 @@ const Post = ({
 
   useEffect(() => {
     setDeleted(false);
+
+    getUserPicture(post.authorId).then((res) => {
+      setAuthorPicture(res);
+    });
   }, [postId]);
+
+  useEffect(() => {}, []);
 
   function getParsCategories(categories) {
     const wordsArray = categories.split(", ");
@@ -48,12 +56,7 @@ const Post = ({
         <>
           <div class="flex-center">
             <div className="authorInfo">
-              <img
-                width={47}
-                height={47}
-                src="https://icons-for-free.com/iconfiles/png/512/business+costume+male+man+office+user+icon-1320196264882354682.png"
-                alt="AutorIcon"
-              />
+              <img width={47} height={47} src={authorPicture} alt="AutorIcon" />
               <span>{`@${authorLogin}`}</span>
               <span> • </span>
               <span className="publishDate">{formatDate(publishDate)}</span>
@@ -85,7 +88,7 @@ const Post = ({
           </div>
         </>
       ) : (
-        <span className="centerText">The message has been deleted</span>
+        <span className="centerText">The post has been deleted</span>
       )}
     </div>
   );
