@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { createComment } from "../../api/comment";
+import { changeComment, createComment } from "../../api/comment";
 
-const WritebleCommentField = ({ idPost, setShouldUpdateComment, editComment }) => {
+const WritebleCommentField = ({
+  idPost,
+  setShouldUpdateComment,
+  editComment,
+  setEdit
+}) => {
   const [comment, setComment] = useState({ content: "" });
 
   function clearWriteField(params) {
@@ -17,6 +22,29 @@ const WritebleCommentField = ({ idPost, setShouldUpdateComment, editComment }) =
       console.log(error);
     }
   };
+
+  const shareEditComment = async () => {
+    try {
+      await changeComment(editComment.id, comment);
+      clearWriteField();
+      setEdit(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (editComment) {
+      setComment({
+        content: editComment.content || "",
+      });
+    }
+  }, [editComment]);
+
+  function exitFromEditMode() {
+    clearWriteField();
+    setEdit(false);
+  }
 
   return (
     <div>
@@ -35,10 +63,10 @@ const WritebleCommentField = ({ idPost, setShouldUpdateComment, editComment }) =
         </button>
       ) : (
         <div>
-          <button className="postButton" onClick={() => {}}>
+          <button className="postButton" onClick={shareEditComment}>
             Edit
           </button>
-          <button className="postButton" onClick={() => {}}>
+          <button className="postButton" onClick={exitFromEditMode}>
             Exit
           </button>
         </div>

@@ -75,7 +75,7 @@ const Main = () => {
               />
             ))
           ) : (
-            <div style={{ fontSize: "32px" }}>Posts not found</div>
+            <div className="centerText" style={{ fontSize: "32px" }}>Posts not found</div>
           )}
           <PageList postsLength={posts.length} totalPages={totalPages} />
         </div>

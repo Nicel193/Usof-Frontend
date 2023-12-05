@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ServerAddress } from "../config";
 
 export default async function checkAuth() {
   try {
@@ -10,7 +11,7 @@ export default async function checkAuth() {
     };
 
     const response = await axios.get(
-      "http://localhost:3001/api/auth/refresh",
+      `${ServerAddress}/api/auth/refresh`,
       config
     );
 

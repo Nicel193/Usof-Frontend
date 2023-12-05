@@ -10,7 +10,8 @@ import { removeUser } from "../store/authSlice";
 import { useAuth } from "../hooks/useAuth";
 
 const Header = () => {
-  const { isAuth, userData } = useAuth();
+  const { isAuth, userData, userAvatar } = useAuth();
+
   const dispatch = useDispatch();
 
   async function onLogout() {
@@ -56,7 +57,7 @@ const Header = () => {
               <img
                 width={35}
                 height={35}
-                src="https://icons-for-free.com/iconfiles/png/512/business+costume+male+man+office+user+icon-1320196264882354682.png"
+                src={userAvatar}
                 alt="ProfileIcon"
               />
               <button className="logout" onClick={onLogout}>

@@ -62,6 +62,7 @@ const Comments = () => {
                 authorLogin={comment.loginOwner}
                 content={comment.content}
                 publishDate={comment.date}
+                comment={comment}
               />
             ))
           ) : (

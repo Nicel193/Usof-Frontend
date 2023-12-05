@@ -3,10 +3,12 @@ import React from "react";
 import { UilAt } from "@iconscout/react-unicons";
 import { UilAdjustHalf } from "@iconscout/react-unicons";
 
-import { useSelector } from "react-redux";
+import { useAuth } from "../hooks/useAuth";
+import { useUserAvatar } from "../hooks/useUserAvatar";
 
 const ProfileInfo = () => {
-  const userData = useSelector((state) => state.auth.userData);
+  const { userData, userId } = useAuth();
+  const { avatar } = useUserAvatar(userId);
 
   if (!userData) {
     return null;
@@ -15,12 +17,7 @@ const ProfileInfo = () => {
   return (
     <div className="profile">
       <div className="cover">
-        <img
-          width={55}
-          height={55}
-          src="https://icons-for-free.com/iconfiles/png/512/business+costume+male+man+office+user+icon-1320196264882354682.png"
-          alt="Avatar"
-        />
+        <img width={55} height={55} src={avatar} alt="Avatar" />
       </div>
       <div className="info">
         <span>{userData.fullName}</span>

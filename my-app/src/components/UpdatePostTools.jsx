@@ -9,7 +9,7 @@ import { deletePostById } from "../api/createPost";
 import Modal from "./Modal";
 import WriteblePostField from "./post/WriteblePostField";
 
-const UpdateTools = ({ authorLogin, post, setDeleted }) => {
+const UpdatePostTools = ({ authorLogin, post, setDeleted }) => {
   const [isEdit, setEdit] = useState(false);
   const { userLogin } = useAuth();
 
@@ -47,4 +47,4 @@ const UpdateTools = ({ authorLogin, post, setDeleted }) => {
   );
 };
 
-export default UpdateTools;
+export default UpdatePostTools;

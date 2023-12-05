@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { getPosts } from "../api/getPosts";
 import { useDispatch, useSelector } from "react-redux";
-import { postUpdated, updatePosts } from "../store/postSlise";
+import { postUpdated } from "../store/postSlise";
 
 export function usePosts(postId) {
   const dispatch = useDispatch();

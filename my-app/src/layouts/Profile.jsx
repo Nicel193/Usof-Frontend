@@ -4,21 +4,24 @@ import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Post from "../components/post/Post";
 
-import ProfileInfo from "../components/ProfileInfo";
-
 import { useSearchParams } from "react-router-dom";
 import { getPostsByUserId } from "../api/getPosts";
-import WriteblePostField from "../components/post/WriteblePostField";
-import PageList from "../components/PageList";
+import { useSelector } from "react-redux";
 import { useAuth } from "../hooks/useAuth";
 
+import ProfileInfo from "../components/ProfileInfo";
+import WriteblePostField from "../components/post/WriteblePostField";
+import PageList from "../components/PageList";
+
 const Profile = () => {
+  const updatePosts = useSelector(
+    (state) => state.posts.shouldUpdatePosts
+  );
   const { userData } = useAuth();
 
   const [shouldUpdatePosts, setShouldUpdatePosts] = useState(true);
   const [totalPages, setTotalPages] = useState(1);
   const [posts, setPosts] = useState([]);
-  const [editablePost, setEditPost] = useState(undefined);
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
@@ -44,11 +47,7 @@ const Profile = () => {
     setShouldUpdatePosts(false);
 
     //eslint-disable-next-line
-  }, [userData, searchParams, shouldUpdatePosts]);
-
-  function editPost(post) {
-    setEditPost(post);
-  }
+  }, [userData, searchParams, shouldUpdatePosts, updatePosts]);
 
   return (
     <div>
@@ -56,26 +55,21 @@ const Profile = () => {
       <section>
         <div className="postContent">
           <WriteblePostField
-            editPost={editablePost}
-            setEditPost={setEditPost}
             setShouldUpdatePosts={setShouldUpdatePosts}
           />
           <span className="centerText">Your Posts</span>
           <div class="underline"></div>
           {posts.length > 0 ? (
             posts.map((post) => (
-              <div>
-                <Post
-                  postId={post.id}
-                  authorLogin={post.authorLogin}
-                  title={post.title}
-                  content={post.content}
-                  categories={post.categories}
-                  publishDate={post.publishDate}
-                  post={post}
-                />
-                <button onClick={() => editPost(post)}>Edit</button>
-              </div>
+              <Post
+                postId={post.id}
+                authorLogin={post.authorLogin}
+                title={post.title}
+                content={post.content}
+                categories={post.categories}
+                publishDate={post.publishDate}
+                post={post}
+              />
             ))
           ) : (
             <div style={{ fontSize: "32px" }}>Posts not found</div>

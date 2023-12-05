@@ -1,7 +1,7 @@
 import $api from "./index";
 
 export const getCommentById = (commetId) => {
-    return $api.get(`/comment/${commetId}`);
+    return $api.get(`/comments/${commetId}`);
 }
 
 export const getCommentsByPost = (postId) => {
@@ -13,5 +13,9 @@ export const createComment = (postId, content) => {
 }
 
 export const changeComment = (commetId, content) => {
-    return $api.patch(`/comment/${commetId}`, content);
+    return $api.patch(`/comments/${commetId}`, content);
+}
+
+export const deleteCommentById = (commetId) => {
+    return $api.delete(`/comments/${commetId}`);
 }

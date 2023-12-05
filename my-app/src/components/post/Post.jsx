@@ -10,8 +10,9 @@ import { useLikes } from "../../hooks/useLikes";
 import { useComments } from "../../hooks/useComments";
 
 import LikeField from "../Like";
-import UpdateTools from "../UpdateTools";
+import UpdateTools from "../UpdatePostTools";
 import { getUserPicture } from "../../services/profilePictureService";
+import { useUserAvatar } from "../../hooks/useUserAvatar";
 
 const Post = ({
   postId,
@@ -23,8 +24,8 @@ const Post = ({
   post,
 }) => {
   const [isDeleted, setDeleted] = useState(false);
-  const [authorPicture, setAuthorPicture] = useState("");
 
+  const { avatar } = useUserAvatar(post.authorId);
   const { commentsCount } = useComments(postId);
   const { selectedLikeType, grade, setLike } = useLikes(
     getPostLikes,
@@ -35,13 +36,7 @@ const Post = ({
 
   useEffect(() => {
     setDeleted(false);
-
-    getUserPicture(post.authorId).then((res) => {
-      setAuthorPicture(res);
-    });
   }, [postId]);
-
-  useEffect(() => {}, []);
 
   function getParsCategories(categories) {
     const wordsArray = categories.split(", ");
@@ -56,7 +51,7 @@ const Post = ({
         <>
           <div class="flex-center">
             <div className="authorInfo">
-              <img width={47} height={47} src={authorPicture} alt="AutorIcon" />
+              <img width={47} height={47} src={avatar} alt="AutorIcon" />
               <span>{`@${authorLogin}`}</span>
               <span> • </span>
               <span className="publishDate">{formatDate(publishDate)}</span>
