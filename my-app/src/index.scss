@@ -33,37 +33,39 @@ code {
   color: #505f98;
 }
 
-input {
-  width: 100%;
-  height: 30px;
-}
+.post-commet {
+  input {
+    width: 100%;
+    height: 30px;
+  }
 
-textarea {
-  width: 100%;
-  resize: vertical;
-}
+  textarea {
+    width: 100%;
+    resize: vertical;
+  }
 
-textarea,
-input {
-  background-color: #fafdfd;
-  border: 0.5px solid rgba(80, 95, 152, 0.35);
-  border-radius: 2px;
-  color: #505f98;
-}
+  textarea,
+  input {
+    background-color: #fafdfd;
+    border: 0.5px solid rgba(80, 95, 152, 0.35);
+    border-radius: 2px;
+    color: #505f98;
+  }
 
-input::placeholder,
-textarea::placeholder {
-  color: rgba(80, 95, 152, 0.35);
-  font-weight: 600;
-}
+  input::placeholder,
+  textarea::placeholder {
+    color: rgba(80, 95, 152, 0.35);
+    font-weight: 600;
+  }
 
-textarea:focus,
-input:focus,
-select:focus {
-  outline: none !important;
-  box-shadow: 0 0 10px rgba(80, 95, 152, 0.35);
-  border: 0.5px solid #505f98;
-  color: #505f98;
+  textarea:focus,
+  input:focus,
+  select:focus {
+    outline: none !important;
+    box-shadow: 0 0 10px rgba(80, 95, 152, 0.35);
+    border: 0.5px solid #505f98;
+    color: #505f98;
+  }
 }
 
 .d-flex {

@@ -80,7 +80,7 @@ const WriteblePostField = ({ editPost, setEditPost }) => {
   };
 
   return (
-    <div>
+    <div className="post-commet">
       <div className="newPost">
         <input
           value={post ? post.title : ""}

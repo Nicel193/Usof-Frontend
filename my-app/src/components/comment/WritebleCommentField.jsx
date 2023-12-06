@@ -47,7 +47,7 @@ const WritebleCommentField = ({
   }
 
   return (
-    <div>
+    <div className="post-commet">
       <div className="writebleCommentField">
         <textarea
           value={comment ? comment.content : ""}

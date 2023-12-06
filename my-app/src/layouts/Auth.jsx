@@ -11,8 +11,8 @@ const Auth = () => {
   const [activeTab, setActiveTab] = useState(false);
 
   useEffect(() => {
-    setActiveTab(state === 'login');
-  }, []); 
+    setActiveTab(state === "login");
+  }, []);
 
   function setTab() {
     setActiveTab(!activeTab);
@@ -28,11 +28,13 @@ const Auth = () => {
 
         <div className="login-signup">
           <span className="text">
-            {(!activeTab ? "Not a member?" : "Already a member?") + '|'}
+            {(!activeTab ? "Not a member?" : "Already a member?") + "|"}
             <span className="text signup-link" onClick={setTab}>
               {!activeTab ? "Register now" : "Login now"}
             </span>
           </span>
+          <br /> <br />
+          <span className="text">Forgot password?</span>
         </div>
       </div>
     </div>
