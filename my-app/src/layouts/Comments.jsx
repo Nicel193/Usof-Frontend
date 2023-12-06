@@ -71,7 +71,7 @@ const Comments = () => {
             </div>
           )}
         </div>
-        <ProfileInfo />
+        {/* <ProfileInfo /> */}
       </section>
       <footer></footer>
     </div>

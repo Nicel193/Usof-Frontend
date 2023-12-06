@@ -10,6 +10,8 @@ import { useLikes } from "../../hooks/useLikes";
 import { useComments } from "../../hooks/useComments";
 import { useUserAvatar } from "../../hooks/useUserAvatar";
 
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 import LikeField from "../Like";
 import UpdatePostTools from "../tools/UpdatePostTools";
 
@@ -50,7 +52,13 @@ const Post = ({
         <>
           <div class="flex-center">
             <div className="authorInfo">
-              <img className="avatar" width={47} height={47} src={avatar} alt="AutorIcon" />
+              <img
+                className="avatar"
+                width={47}
+                height={47}
+                src={avatar}
+                alt="AutorIcon"
+              />
               <span>{`@${authorLogin}`}</span>
               <span> • </span>
               <span className="publishDate">{formatDate(publishDate)}</span>
@@ -64,7 +72,13 @@ const Post = ({
             />
           </div>
           <h4>{`"${title}"`}</h4>
-          <span>{`${content} ${getParsCategories(categories)}`}</span>
+          <div className="markdownStyles">
+            <ReactMarkdown
+              children={`${content}\n${getParsCategories(categories)}`}
+              rehypePlugins={[rehypeRaw]}
+            />
+          </div>
+          {/* <span>{`${content} ${getParsCategories(categories)}`}</span> */}
           <div></div>
           <div className="d-flex">
             <LikeField

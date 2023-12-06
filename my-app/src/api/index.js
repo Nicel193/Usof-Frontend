@@ -3,7 +3,7 @@ import { ServerAddress } from "../config";
 
 const $api = axios.create({
     withCredentials: true,
-    baseURL: `http://localhost:3001/api/`,
+    baseURL: `${ServerAddress}/api/`,
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
