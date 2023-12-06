@@ -5,7 +5,6 @@ import Header from "../components/Header";
 import Post from "../components/post/Post";
 import { useParams } from "react-router-dom";
 import { getPostById } from "../api/getPosts";
-import ProfileInfo from "../components/ProfileInfo";
 import WritebleCommentField from "../components/comment/WritebleCommentField";
 import Comment from "../components/comment/Comment";
 import { useComments } from "../hooks/useComments";

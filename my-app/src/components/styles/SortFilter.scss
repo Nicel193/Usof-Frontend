@@ -1,0 +1,22 @@
+.sort-filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+
+  button {
+    background-color: #6d70b3;
+    border: #e7ecff;
+    margin-top: 15px;
+    margin-left: 5px;
+    font-size: 20px;
+    border-radius: 25px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 35px;
+    padding-right: 35px;
+    float: right;
+
+    color: #e7ecff;
+  }
+}

@@ -14,6 +14,7 @@ import Category from "../components/Category";
 import PageList from "../components/PageList";
 import { usePosts } from "../hooks/usePosts";
 import { useCategories } from "../hooks/useCategories";
+import SortFilter from "../components/SortFilter";
 
 const Main = () => {
   const [selectedButtonId, setButtonId] = useState(0);
@@ -84,24 +85,27 @@ const Main = () => {
 
       <section>
         <div className="posts">
-          {posts.length > 0 ? (
-            posts.map((post) => (
-              <Post
-                postId={post.id}
-                authorLogin={post.authorLogin}
-                title={post.title}
-                content={post.content}
-                categories={post.categories}
-                publishDate={post.publishDate}
-                post={post}
-              />
-            ))
-          ) : (
-            <div className="centerText" style={{ fontSize: "32px" }}>
-              Posts not found
-            </div>
-          )}
-          <PageList postsLength={posts.length} totalPages={totalPages} />
+          <SortFilter />
+          <div>
+            {posts.length > 0 ? (
+              posts.map((post) => (
+                <Post
+                  postId={post.id}
+                  authorLogin={post.authorLogin}
+                  title={post.title}
+                  content={post.content}
+                  categories={post.categories}
+                  publishDate={post.publishDate}
+                  post={post}
+                />
+              ))
+            ) : (
+              <div className="centerText" style={{ fontSize: "32px" }}>
+                Posts not found
+              </div>
+            )}
+            <PageList postsLength={posts.length} totalPages={totalPages} />
+          </div>
         </div>
       </section>
 
