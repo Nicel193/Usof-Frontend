@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { changeComment, createComment } from "../../api/comment";
+import { useDispatch } from "react-redux";
+import { updatePosts } from "../../store/postSlise";
 
 const WritebleCommentField = ({
   idPost,
@@ -7,6 +9,7 @@ const WritebleCommentField = ({
   editComment,
   setEdit
 }) => {
+  const dispatch = useDispatch();
   const [comment, setComment] = useState({ content: "" });
 
   function clearWriteField(params) {
@@ -26,6 +29,7 @@ const WritebleCommentField = ({
   const shareEditComment = async () => {
     try {
       await changeComment(editComment.id, comment);
+      dispatch(updatePosts());
       clearWriteField();
       setEdit(false);
     } catch (error) {
