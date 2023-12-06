@@ -28,16 +28,25 @@ const UpdateUserProfile = () => {
   }
 
   return (
-    <>
-      <button className="transparent-button updateTools editAvatar" onClick={() => setEdit(true)}>
+    <div>
+      <button
+        className="transparent-button updateTools editAvatar"
+        onClick={() => setEdit(true)}
+      >
         <UilPen size={16} />
       </button>
       <Modal isOpen={isEdit}>
-        <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-        <button onClick={uploadFile}>Upload</button>
-        <button onClick={() => setEdit(false)}>Exit</button>
+        <div className="editAvatarField">
+          <input
+            type="file"
+            class="custom-file-input"
+            onChange={(e) => setFile(e.target.files[0])}
+          />
+          <button onClick={uploadFile}>Upload</button>
+          <button onClick={() => setEdit(false)}>Exit</button>
+        </div>
       </Modal>
-    </>
+    </div>
   );
 };
 
